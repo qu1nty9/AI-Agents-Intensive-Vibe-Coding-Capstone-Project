@@ -1,0 +1,95 @@
+{
+  "case_name": "data_leakage",
+  "verdict": "partially_reproduced",
+  "summary": "The metric evidence is incomplete or compromised by audit findings.",
+  "plan": {
+    "steps": [
+      "Load and validate benchmark case metadata.",
+      "Inspect case metadata and available experiment artifacts.",
+      "Extract the claimed metric, expected value, and tolerance.",
+      "Run safety checks before executing untrusted code.",
+      "Execute the experiment in a controlled environment.",
+      "Compare observed evidence against the claim.",
+      "Export a reproducibility report with trace and findings."
+    ],
+    "safety_checks": [
+      "scan_for_secrets",
+      "validate_case_path",
+      "enforce_execution_timeout",
+      "detect_data_leakage",
+      "run_python_script",
+      "compare_metric"
+    ]
+  },
+  "tool_calls": [
+    {
+      "name": "load_case_spec",
+      "inputs": {
+        "path": "examples/cases/data_leakage"
+      },
+      "status": "completed"
+    },
+    {
+      "name": "validate_case_path",
+      "inputs": {
+        "path": "examples/cases/data_leakage"
+      },
+      "status": "completed"
+    },
+    {
+      "name": "scan_for_secrets",
+      "inputs": {
+        "path": "examples/cases/data_leakage",
+        "findings": 0
+      },
+      "status": "completed"
+    },
+    {
+      "name": "detect_data_leakage",
+      "inputs": {
+        "dataset_path": "examples/cases/data_leakage/toy_leakage.csv",
+        "target_column": "target",
+        "findings": 1
+      },
+      "status": "completed"
+    },
+    {
+      "name": "run_python_script",
+      "inputs": {
+        "path": "examples/cases/data_leakage/experiment.py",
+        "run_index": 1,
+        "return_code": 0,
+        "timed_out": false
+      },
+      "status": "completed"
+    },
+    {
+      "name": "compare_metric",
+      "inputs": {
+        "metric_name": "accuracy",
+        "expected": 1.0,
+        "actual": 1.0,
+        "tolerance": 0.0,
+        "delta": 0.0
+      },
+      "status": "completed"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "info",
+      "title": "Loaded benchmark case: Data Leakage",
+      "detail": "Expected verdict is partially_reproduced; claim is accuracy=1.0 tolerance=0.0; failure mode is data_leakage."
+    },
+    {
+      "severity": "warning",
+      "title": "Potential target leakage",
+      "detail": "Column 'leaky_target_copy' exactly matches target column 'target' for all 8 rows."
+    },
+    {
+      "severity": "info",
+      "title": "Metric reproduced within tolerance",
+      "detail": "accuracy: expected 1.0, observed 1.0, tolerance 0.0."
+    }
+  ]
+}

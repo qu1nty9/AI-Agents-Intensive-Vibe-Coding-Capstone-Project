@@ -36,3 +36,10 @@ This milestone moves the project beyond a skeleton. The agent can now produce ev
 - missing dependency classified as blocked;
 - target leakage detected even when the metric reproduces.
 
+## Report Export
+
+The core audit workflow can export both Markdown and JSON evidence reports:
+
+```bash
+PYTHONPATH=src python3 -m reprobench run examples/cases/data_leakage --output-dir reports/sample/data_leakage
+```

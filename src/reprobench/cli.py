@@ -9,6 +9,7 @@ from pathlib import Path
 from reprobench import __version__
 from reprobench.agents.workflow import build_initial_plan, run_foundation_workflow
 from reprobench.benchmark import list_case_specs, validate_all_cases, validate_case_directory
+from reprobench.reporting import report_to_dict, write_report_bundle
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -74,6 +75,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Print the report as JSON instead of readable text.",
     )
+    run_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        help="Optional directory for writing report.md and report.json.",
+    )
 
     return parser
 
@@ -100,6 +106,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "run":
         report = run_foundation_workflow(args.case_path)
+        if args.output_dir:
+            markdown_path, json_path = write_report_bundle(report, args.output_dir)
+            print(f"Wrote report: {markdown_path}")
+            print(f"Wrote report: {json_path}")
         if args.json:
             print(json.dumps(report_to_dict(report), indent=2))
         else:
@@ -165,7 +175,7 @@ def print_info() -> None:
     print("ReproBench Agent")
     print(f"Version: {__version__}")
     print("Track: Kaggle Freestyle")
-    print("Milestone: 2 - core audit tools")
+    print("Milestone: 3 - evidence report export")
     print("Thesis: Turn ML claims into reproducible, auditable evidence.")
 
 
@@ -190,34 +200,6 @@ def print_report(report) -> None:
         print("Findings:")
         for finding in report.findings:
             print(f"  [{finding.severity}] {finding.title}: {finding.detail}")
-
-
-def report_to_dict(report) -> dict:
-    return {
-        "case_name": report.case_name,
-        "verdict": report.verdict.value,
-        "summary": report.summary,
-        "plan": {
-            "steps": list(report.plan.steps),
-            "safety_checks": list(report.plan.safety_checks),
-        },
-        "tool_calls": [
-            {
-                "name": tool_call.name,
-                "inputs": tool_call.inputs,
-                "status": tool_call.status,
-            }
-            for tool_call in report.tool_calls
-        ],
-        "findings": [
-            {
-                "severity": finding.severity,
-                "title": finding.title,
-                "detail": finding.detail,
-            }
-            for finding in report.findings
-        ],
-    }
 
 
 def print_validation_results(results) -> None:

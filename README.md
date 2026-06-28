@@ -23,23 +23,23 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 2 is complete: repository foundation, benchmark case suite, and local core audit tools.
+Milestone 3 is complete: repository foundation, benchmark case suite, local core audit tools, and evidence report export.
 
 Implemented now:
 
 - Python package layout under `src/reprobench`.
 - CLI entrypoint.
 - Typed domain model for claims, plans, tool calls, findings, and reports.
-- Deterministic dry-run workflow.
+- Deterministic local audit workflow.
 - Five benchmark cases with validated `case.json` specs.
 - Local tools for script execution, metric comparison, missing seed detection, leakage detection, secret scanning, and execution error classification.
 - `cases audit` command that verifies actual verdicts against expected benchmark verdicts.
+- Markdown and JSON report export via `reprobench run --output-dir`.
 - Documentation skeleton for architecture, demo, and Kaggle writeup.
-- Unit and integration tests for CLI, workflow contracts, and case validation.
+- Unit and integration tests for CLI, workflow contracts, tools, reports, and case validation.
 
 Coming next:
 
-- Evidence report generation.
 - MCP server wrapper for core tools.
 - Security layer for untrusted experiment execution.
 
@@ -55,6 +55,7 @@ PYTHONPATH=src python3 -m reprobench cases validate
 PYTHONPATH=src python3 -m reprobench cases audit
 PYTHONPATH=src python3 -m reprobench plan examples/cases/clean_baseline
 PYTHONPATH=src python3 -m reprobench run examples/cases/clean_baseline
+PYTHONPATH=src python3 -m reprobench run examples/cases/data_leakage --output-dir reports/sample/data_leakage
 ```
 
 After installing the package locally, the console script is also available:
@@ -78,6 +79,7 @@ Or use the included Makefile:
 make test
 make demo
 make audit-cases
+make sample-report
 ```
 
 If you install the optional development dependencies, `pytest` can also run the same tests:

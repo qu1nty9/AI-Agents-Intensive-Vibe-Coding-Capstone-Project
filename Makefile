@@ -1,7 +1,7 @@
 PYTHON ?= python3
 PYTHONPATH := src
 
-.PHONY: help info cases validate-cases audit-cases plan demo test compile
+.PHONY: help info cases validate-cases audit-cases sample-report plan demo test compile
 
 help:
 	@echo "ReproBench Agent commands"
@@ -9,6 +9,7 @@ help:
 	@echo "  make cases    List benchmark cases"
 	@echo "  make validate-cases"
 	@echo "  make audit-cases"
+	@echo "  make sample-report"
 	@echo "  make plan     Show the foundation reproduction plan"
 	@echo "  make demo     Run the milestone-0 demo flow"
 	@echo "  make test     Run unit and integration tests"
@@ -25,6 +26,9 @@ validate-cases:
 
 audit-cases:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench cases audit
+
+sample-report:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench run examples/cases/data_leakage --output-dir reports/sample/data_leakage
 
 plan:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench plan examples/cases/clean_baseline

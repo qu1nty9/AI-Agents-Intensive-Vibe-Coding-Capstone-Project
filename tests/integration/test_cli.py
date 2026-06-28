@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import tempfile
 from unittest import TestCase
 
 
@@ -58,3 +59,23 @@ class CliTest(TestCase):
 
         self.assertEqual(result.returncode, 0)
         self.assertIn("Expected verdicts matched: 5/5", result.stdout)
+
+    def test_run_command_writes_report_bundle(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "reprobench",
+                    "run",
+                    "examples/cases/data_leakage",
+                    "--output-dir",
+                    temp_dir,
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(result.returncode, 0)
+            self.assertIn("Wrote report", result.stdout)
