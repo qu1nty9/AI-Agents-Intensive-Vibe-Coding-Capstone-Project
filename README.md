@@ -23,7 +23,7 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 1 is complete: repository foundation plus a controlled benchmark case suite.
+Milestone 2 is complete: repository foundation, benchmark case suite, and local core audit tools.
 
 Implemented now:
 
@@ -32,12 +32,13 @@ Implemented now:
 - Typed domain model for claims, plans, tool calls, findings, and reports.
 - Deterministic dry-run workflow.
 - Five benchmark cases with validated `case.json` specs.
+- Local tools for script execution, metric comparison, missing seed detection, leakage detection, secret scanning, and execution error classification.
+- `cases audit` command that verifies actual verdicts against expected benchmark verdicts.
 - Documentation skeleton for architecture, demo, and Kaggle writeup.
 - Unit and integration tests for CLI, workflow contracts, and case validation.
 
 Coming next:
 
-- Notebook inspection and execution tools.
 - Evidence report generation.
 - MCP server wrapper for core tools.
 - Security layer for untrusted experiment execution.
@@ -51,6 +52,7 @@ PYTHONPATH=src python3 -m reprobench --help
 PYTHONPATH=src python3 -m reprobench info
 PYTHONPATH=src python3 -m reprobench cases list
 PYTHONPATH=src python3 -m reprobench cases validate
+PYTHONPATH=src python3 -m reprobench cases audit
 PYTHONPATH=src python3 -m reprobench plan examples/cases/clean_baseline
 PYTHONPATH=src python3 -m reprobench run examples/cases/clean_baseline
 ```
@@ -75,6 +77,7 @@ Or use the included Makefile:
 ```bash
 make test
 make demo
+make audit-cases
 ```
 
 If you install the optional development dependencies, `pytest` can also run the same tests:
@@ -106,10 +109,11 @@ The initial benchmark suite lives in [examples/cases](examples/cases). Schema an
 - `missing_dependency`: execution is blocked by an unavailable dependency.
 - `data_leakage`: the metric reproduces, but the evidence is compromised by target leakage.
 
-Validate the suite with:
+Validate and audit the suite with:
 
 ```bash
 make validate-cases
+make audit-cases
 ```
 
 ## Repository Layout

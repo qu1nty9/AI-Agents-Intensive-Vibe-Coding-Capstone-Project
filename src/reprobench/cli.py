@@ -52,6 +52,18 @@ def build_parser() -> argparse.ArgumentParser:
     )
     cases_validate_parser.add_argument("--json", action="store_true", help="Print JSON output.")
 
+    cases_audit_parser = cases_subparsers.add_parser(
+        "audit",
+        help="Run all benchmark cases and compare actual verdicts with expected verdicts.",
+    )
+    cases_audit_parser.add_argument(
+        "--root",
+        type=Path,
+        default=Path("examples/cases"),
+        help="Root directory containing benchmark cases.",
+    )
+    cases_audit_parser.add_argument("--json", action="store_true", help="Print JSON output.")
+
     plan_parser = subparsers.add_parser("plan", help="Create a reproduction plan for a case.")
     plan_parser.add_argument("case_path", type=Path, help="Path to an experiment case.")
 
@@ -125,6 +137,26 @@ def handle_cases_command(args: argparse.Namespace, parser: argparse.ArgumentPars
             print_validation_results(results)
         return 0 if all(result.valid for result in results) else 1
 
+    if args.cases_command == "audit":
+        rows = []
+        for spec in list_case_specs(args.root):
+            report = run_foundation_workflow(spec.path)
+            expected = spec.expected_verdict.value if spec.expected_verdict else None
+            actual = report.verdict.value
+            rows.append(
+                {
+                    "name": spec.name,
+                    "expected_verdict": expected,
+                    "actual_verdict": actual,
+                    "matched": expected == actual,
+                }
+            )
+        if args.json:
+            print(json.dumps(rows, indent=2))
+        else:
+            print_audit_rows(rows)
+        return 0 if all(row["matched"] for row in rows) else 1
+
     parser.error(f"unknown cases subcommand: {args.cases_command}")
     return 2
 
@@ -133,7 +165,7 @@ def print_info() -> None:
     print("ReproBench Agent")
     print(f"Version: {__version__}")
     print("Track: Kaggle Freestyle")
-    print("Milestone: 1 - benchmark case suite")
+    print("Milestone: 2 - core audit tools")
     print("Thesis: Turn ML claims into reproducible, auditable evidence.")
 
 
@@ -197,6 +229,17 @@ def print_validation_results(results) -> None:
         print(f"- {case_name}: {status}")
         for error in result.errors:
             print(f"  error: {error}")
+
+
+def print_audit_rows(rows: list[dict]) -> None:
+    matched_count = sum(1 for row in rows if row["matched"])
+    print(f"Expected verdicts matched: {matched_count}/{len(rows)}")
+    for row in rows:
+        status = "ok" if row["matched"] else "mismatch"
+        print(
+            f"- {row['name']}: expected={row['expected_verdict']} "
+            f"actual={row['actual_verdict']} [{status}]"
+        )
 
 
 def case_spec_to_dict(spec) -> dict:

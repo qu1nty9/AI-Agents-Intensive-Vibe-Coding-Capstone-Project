@@ -47,3 +47,14 @@ class CliTest(TestCase):
 
         self.assertEqual(result.returncode, 0)
         self.assertIn("data_leakage", result.stdout)
+
+    def test_cases_audit_command_runs(self):
+        result = subprocess.run(
+            [sys.executable, "-m", "reprobench", "cases", "audit"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("Expected verdicts matched: 5/5", result.stdout)

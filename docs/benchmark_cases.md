@@ -48,12 +48,14 @@ Optional fields:
 
 ```bash
 PYTHONPATH=src python3 -m reprobench cases validate
+PYTHONPATH=src python3 -m reprobench cases audit
 ```
 
 Expected output:
 
 ```text
 Valid cases: 5/5
+Expected verdicts matched: 5/5
 ```
 
 ## Design Rules
@@ -63,4 +65,3 @@ Valid cases: 5/5
 - Make the expected verdict explicit.
 - Prefer deterministic scripts unless the case is intentionally about instability.
 - Keep failure modes intentional and documented.
-

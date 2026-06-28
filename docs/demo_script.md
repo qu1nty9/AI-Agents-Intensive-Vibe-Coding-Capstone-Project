@@ -43,6 +43,12 @@ Then open the generated report and point out:
 - final verdict;
 - recommended fix.
 
+Also show the full benchmark proof:
+
+```bash
+reprobench cases audit
+```
+
 ## 3:30-4:20 - Evidence and Safety
 
 Show sample reports and tests. Mention that untrusted code is treated carefully through secret scanning, allowlists, timeouts, and redaction.
@@ -52,4 +58,3 @@ Show sample reports and tests. Mention that untrusted code is treated carefully 
 State why this matters for Kaggle and ML work:
 
 > ReproBench Agent does not just answer whether a result is believable. It gathers evidence and makes the review reproducible.
-

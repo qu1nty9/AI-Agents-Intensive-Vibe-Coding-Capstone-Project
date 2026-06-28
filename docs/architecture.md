@@ -72,7 +72,17 @@ Prevents unsafe execution by scanning inputs, enforcing path boundaries, applyin
 
 ### Execution Agent
 
-Invokes notebook, script, and dataset tools. It does not silently execute arbitrary commands.
+Invokes script and dataset tools. It does not silently execute arbitrary commands.
+
+Current local tools:
+
+- secret scanning;
+- Python script execution with timeout;
+- JSON metric parsing;
+- metric comparison;
+- missing seed detection;
+- CSV leakage detection;
+- execution error classification.
 
 ### Evidence Auditor
 

@@ -76,6 +76,31 @@ class ToolCall:
 
 
 @dataclass(frozen=True)
+class ExecutionResult:
+    """Result from running an experiment artifact."""
+
+    command: tuple[str, ...]
+    return_code: int
+    stdout: str = ""
+    stderr: str = ""
+    duration_seconds: float = 0.0
+    timed_out: bool = False
+    parsed_output: dict[str, Any] | None = None
+
+
+@dataclass(frozen=True)
+class MetricComparison:
+    """Comparison between a claimed metric and an observed metric."""
+
+    metric_name: str
+    expected_value: float
+    actual_value: float
+    tolerance: float
+    passed: bool
+    delta: float
+
+
+@dataclass(frozen=True)
 class AuditFinding:
     """A finding produced by the evidence auditor."""
 
