@@ -1,8 +1,8 @@
 # Benchmark Cases
 
-This directory will contain small reproducibility cases used by the demo and tests.
+This directory contains small reproducibility cases used by the demo and tests.
 
-Planned cases:
+Implemented cases:
 
 - `clean_baseline`: a valid reproducible experiment.
 - `metric_mismatch`: the claimed metric does not match the observed metric.
@@ -10,11 +10,22 @@ Planned cases:
 - `missing_dependency`: execution is blocked by an environment issue.
 - `data_leakage`: a suspiciously strong result is caused by leakage.
 
-Each case should eventually include:
+Each case includes:
 
-- `case.yaml` or `case.json`;
-- one short notebook or script;
+- `case.json`;
+- one short script;
 - tiny local data, if needed;
 - expected verdict;
 - explanation for the benchmark.
 
+Validate all cases:
+
+```bash
+PYTHONPATH=src python3 -m reprobench cases validate
+```
+
+List cases:
+
+```bash
+PYTHONPATH=src python3 -m reprobench cases list
+```

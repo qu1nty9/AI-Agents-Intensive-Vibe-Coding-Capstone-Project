@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "name": "metric_mismatch",
+  "title": "Metric Mismatch",
+  "description": "A deterministic experiment where the actual accuracy is lower than the claimed accuracy.",
+  "artifact": "experiment.py",
+  "claim": {
+    "metric_name": "accuracy",
+    "expected_value": 0.95,
+    "tolerance": 0.01,
+    "source": "case_spec"
+  },
+  "expected_verdict": "not_reproduced",
+  "failure_mode": "metric_mismatch",
+  "tags": [
+    "deterministic",
+    "metric-comparison",
+    "negative-case"
+  ],
+  "checks": [
+    "scan_for_secrets",
+    "run_python_script",
+    "compare_metric"
+  ],
+  "notes": "This case proves the agent can reject a claim when the observed metric does not meet tolerance."
+}
+

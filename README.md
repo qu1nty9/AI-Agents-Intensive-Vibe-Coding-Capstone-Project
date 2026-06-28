@@ -23,20 +23,20 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 0 is complete: repository foundation, package skeleton, CLI, docs, and smoke tests.
+Milestone 1 is complete: repository foundation plus a controlled benchmark case suite.
 
 Implemented now:
 
 - Python package layout under `src/reprobench`.
 - CLI entrypoint.
 - Typed domain model for claims, plans, tool calls, findings, and reports.
-- Deterministic placeholder workflow.
+- Deterministic dry-run workflow.
+- Five benchmark cases with validated `case.json` specs.
 - Documentation skeleton for architecture, demo, and Kaggle writeup.
-- Unit tests for CLI and workflow contracts.
+- Unit and integration tests for CLI, workflow contracts, and case validation.
 
 Coming next:
 
-- Benchmark cases in `examples/cases/`.
 - Notebook inspection and execution tools.
 - Evidence report generation.
 - MCP server wrapper for core tools.
@@ -49,6 +49,8 @@ From the repository root:
 ```bash
 PYTHONPATH=src python3 -m reprobench --help
 PYTHONPATH=src python3 -m reprobench info
+PYTHONPATH=src python3 -m reprobench cases list
+PYTHONPATH=src python3 -m reprobench cases validate
 PYTHONPATH=src python3 -m reprobench plan examples/cases/clean_baseline
 PYTHONPATH=src python3 -m reprobench run examples/cases/clean_baseline
 ```
@@ -93,6 +95,22 @@ The target architecture is a multi-step agent workflow:
 - **Reporter**: exports markdown and JSON evidence reports.
 
 More detail: [docs/architecture.md](docs/architecture.md).
+
+## Benchmark Suite
+
+The initial benchmark suite lives in [examples/cases](examples/cases). Schema and design rules are documented in [docs/benchmark_cases.md](docs/benchmark_cases.md).
+
+- `clean_baseline`: a valid reproducible experiment.
+- `metric_mismatch`: the claimed score is higher than the observed score.
+- `seed_instability`: the experiment uses randomness without seed control.
+- `missing_dependency`: execution is blocked by an unavailable dependency.
+- `data_leakage`: the metric reproduces, but the evidence is compromised by target leakage.
+
+Validate the suite with:
+
+```bash
+make validate-cases
+```
 
 ## Repository Layout
 

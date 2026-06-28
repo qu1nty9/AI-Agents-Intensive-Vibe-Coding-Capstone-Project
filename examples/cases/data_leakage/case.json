@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "name": "data_leakage",
+  "title": "Data Leakage",
+  "description": "An experiment with a suspiciously strong score caused by using a feature that directly copies the target.",
+  "artifact": "experiment.py",
+  "dataset": "toy_leakage.csv",
+  "target_column": "target",
+  "claim": {
+    "metric_name": "accuracy",
+    "expected_value": 1.0,
+    "tolerance": 0.0,
+    "source": "case_spec"
+  },
+  "expected_verdict": "partially_reproduced",
+  "failure_mode": "data_leakage",
+  "tags": [
+    "leakage",
+    "audit",
+    "high-impact-demo"
+  ],
+  "checks": [
+    "scan_for_secrets",
+    "detect_data_leakage",
+    "run_python_script",
+    "compare_metric"
+  ],
+  "notes": "This should become the strongest video demo: the metric reproduces, but the evidence is not trustworthy because the target leaks into a feature."
+}
+

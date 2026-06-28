@@ -19,6 +19,9 @@ The system should be judged by artifacts, not by conversational polish:
 User / Demo Case
       |
       v
+Benchmark Case Loader
+      |
+      v
 Coordinator Agent
       |
       +--> Claim Extractor
@@ -39,6 +42,10 @@ Report Generator
 ```
 
 ## Agent Responsibilities
+
+### Benchmark Case Loader
+
+Loads `case.json`, validates required fields, resolves artifact paths, and gives the agent an explicit expected verdict for benchmark evaluation.
 
 ### Coordinator Agent
 
@@ -108,4 +115,3 @@ Planned MCP tools:
 ## Design Principle
 
 The agent should never hide uncertainty. If a run is blocked, unsafe, or inconclusive, the report should say why and show the supporting evidence.
-

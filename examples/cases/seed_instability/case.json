@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "name": "seed_instability",
+  "title": "Seed Instability",
+  "description": "An experiment that uses randomness without setting a seed, making repeated runs unstable.",
+  "artifact": "experiment.py",
+  "claim": {
+    "metric_name": "accuracy",
+    "expected_value": 0.82,
+    "tolerance": 0.02,
+    "source": "case_spec"
+  },
+  "expected_verdict": "partially_reproduced",
+  "failure_mode": "missing_seed",
+  "tags": [
+    "randomness",
+    "missing-seed",
+    "stability"
+  ],
+  "checks": [
+    "scan_for_secrets",
+    "detect_missing_seed",
+    "run_repeated_trials",
+    "compare_metric"
+  ],
+  "notes": "This case is intended for repeated-run tools. The audit should flag the missing seed even if one run happens to match the claim."
+}
+

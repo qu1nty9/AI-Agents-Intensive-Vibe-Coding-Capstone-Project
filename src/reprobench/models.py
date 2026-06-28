@@ -34,8 +34,27 @@ class CaseSpec:
 
     path: Path
     name: str
+    title: str = ""
+    description: str = ""
+    artifact_path: Path | None = None
     claim: Claim | None = None
     expected_verdict: Verdict | None = None
+    failure_mode: str = ""
+    tags: tuple[str, ...] = ()
+    checks: tuple[str, ...] = ()
+    dataset_path: Path | None = None
+    target_column: str | None = None
+    notes: str = ""
+
+
+@dataclass(frozen=True)
+class CaseValidationResult:
+    """Validation outcome for a benchmark case directory."""
+
+    case_path: Path
+    valid: bool
+    errors: tuple[str, ...] = ()
+    spec: CaseSpec | None = None
 
 
 @dataclass(frozen=True)
@@ -75,4 +94,3 @@ class EvidenceReport:
     tool_calls: tuple[ToolCall, ...] = ()
     findings: tuple[AuditFinding, ...] = ()
     summary: str = ""
-

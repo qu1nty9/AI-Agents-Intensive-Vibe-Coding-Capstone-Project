@@ -26,3 +26,24 @@ class CliTest(TestCase):
         self.assertEqual(result.returncode, 0)
         self.assertIn("ReproBench Agent", result.stdout)
 
+    def test_cases_validate_command_runs(self):
+        result = subprocess.run(
+            [sys.executable, "-m", "reprobench", "cases", "validate"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("Valid cases: 5/5", result.stdout)
+
+    def test_cases_list_command_runs(self):
+        result = subprocess.run(
+            [sys.executable, "-m", "reprobench", "cases", "list"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("data_leakage", result.stdout)

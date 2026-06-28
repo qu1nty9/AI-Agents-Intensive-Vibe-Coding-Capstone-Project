@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "name": "clean_baseline",
+  "title": "Clean Reproducible Baseline",
+  "description": "A deterministic experiment where the observed accuracy should match the claimed accuracy exactly.",
+  "artifact": "experiment.py",
+  "claim": {
+    "metric_name": "accuracy",
+    "expected_value": 0.9,
+    "tolerance": 0.0,
+    "source": "case_spec"
+  },
+  "expected_verdict": "reproduced",
+  "failure_mode": "none",
+  "tags": [
+    "baseline",
+    "deterministic",
+    "metric-comparison"
+  ],
+  "checks": [
+    "scan_for_secrets",
+    "run_python_script",
+    "compare_metric"
+  ],
+  "notes": "This case proves the happy path: the benchmark framework should be able to confirm a valid claim."
+}
+

@@ -41,9 +41,8 @@ The agent treats notebooks and experiment files as untrusted inputs. Planned con
 
 ## Evidence
 
-The project will include benchmark cases for clean reproducibility, missing dependencies, random seed instability, metric mismatch, and data leakage.
+The project includes benchmark cases for clean reproducibility, missing dependencies, random seed instability, metric mismatch, and data leakage.
 
 ## Limitations
 
 The initial benchmark is intentionally small and controlled. The project prioritizes transparent evidence and reproducible demos over broad support for arbitrary repositories.
-
