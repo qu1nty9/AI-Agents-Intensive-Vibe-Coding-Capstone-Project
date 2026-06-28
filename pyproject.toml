@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reprobench-agent"
+version = "0.1.0"
+description = "Evidence-first AI agent for reproducible ML experiment audits."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "ReproBench Agent Team" }
+]
+keywords = [
+  "ai-agents",
+  "kaggle",
+  "machine-learning",
+  "reproducibility",
+  "mcp"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.5"
+]
+notebook = [
+  "nbformat>=5.10",
+  "nbclient>=0.10"
+]
+mcp = [
+  "mcp>=1.0"
+]
+
+[project.scripts]
+reprobench = "reprobench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
