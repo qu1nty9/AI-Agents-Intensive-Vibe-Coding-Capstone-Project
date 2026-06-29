@@ -18,6 +18,7 @@ make audit-cases
 make benchmark-report
 make sample-report
 make dashboard
+make pages
 make mcp-demo
 make demo
 make compile
@@ -30,6 +31,7 @@ Expected results:
 - `reports/sample/benchmark/benchmark_summary.md` is generated;
 - `reports/sample/data_leakage/report.md` is generated;
 - `reports/sample/dashboard/index.html` is generated;
+- `docs/index.html` is generated for GitHub Pages;
 - MCP `audit_case` demo returns `partially_reproduced` for `data_leakage`.
 
 ## Writeup Evidence To Link
@@ -37,6 +39,7 @@ Expected results:
 - [Benchmark summary](../reports/sample/benchmark/benchmark_summary.md)
 - [Data leakage evidence report](../reports/sample/data_leakage/report.md)
 - [Static demo dashboard](../reports/sample/dashboard/index.html)
+- [GitHub Pages dashboard](index.html)
 - [Architecture](architecture.md)
 - [MCP server](mcp_server.md)
 - [Security model](security.md)

@@ -89,6 +89,7 @@ make audit-cases
 make benchmark-report
 make sample-report
 make dashboard
+make pages
 make mcp-tools
 make mcp-demo
 ```
@@ -142,9 +143,12 @@ Generate the static demo dashboard:
 
 ```bash
 make dashboard
+make pages
 ```
 
 Open [reports/sample/dashboard/index.html](reports/sample/dashboard/index.html) to inspect the benchmark proof, data leakage verdict, findings, and tool trace in one page.
+
+`make pages` writes the same dashboard to [docs/index.html](docs/index.html), which is ready for GitHub Pages deployment. Deployment notes: [docs/github_pages.md](docs/github_pages.md).
 
 ## Repository Layout
 

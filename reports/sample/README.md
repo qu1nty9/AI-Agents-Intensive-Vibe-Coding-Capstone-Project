@@ -21,3 +21,9 @@ Generate the static dashboard:
 ```bash
 make dashboard
 ```
+
+Generate the GitHub Pages copy:
+
+```bash
+make pages
+```
