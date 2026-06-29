@@ -72,6 +72,7 @@ Expected results:
 - README quickstart works from a clean checkout.
 - `make ci` passes locally.
 - CI workflow is green on GitHub.
+- GitHub Pages workflow is green, or Pages has been enabled manually with the GitHub Actions source.
 - GitHub repository is public.
 - YouTube video is public or unlisted but accessible.
 - Kaggle Writeup has the Freestyle track selected.

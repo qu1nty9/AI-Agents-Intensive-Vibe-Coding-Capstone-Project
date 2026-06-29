@@ -25,7 +25,7 @@ The page is generated from:
 
 The workflow `.github/workflows/pages.yml` deploys the `docs/` directory to GitHub Pages on pushes to `main`.
 
-In GitHub:
+The workflow asks `actions/configure-pages` to enable Pages automatically with the GitHub Actions source. If repository settings or organization policy block automatic enablement, configure it manually in GitHub:
 
 1. Open repository settings.
 2. Go to **Pages**.
@@ -39,4 +39,3 @@ https://qu1nty9.github.io/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/
 ```
 
 Use that URL as the Kaggle project link once the workflow has completed successfully.
-

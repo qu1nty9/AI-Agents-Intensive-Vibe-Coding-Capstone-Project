@@ -52,7 +52,7 @@ The strongest live demo is the `data_leakage` case:
 
 ## External Tasks Before Kaggle Submit
 
-- Confirm GitHub Pages is enabled with the GitHub Actions source.
+- Confirm the GitHub Pages workflow completed successfully. If automatic enablement is blocked, enable Pages with the GitHub Actions source in repository settings.
 - Wait for the CI workflow to turn green after the final push.
 - Record and upload the under-5-minute YouTube video.
 - Add the YouTube URL to the Kaggle Writeup.
