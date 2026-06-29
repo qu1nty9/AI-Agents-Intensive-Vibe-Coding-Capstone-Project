@@ -2,6 +2,17 @@
 
 **Subtitle:** An agent that turns machine learning claims into auditable reproduction reports.
 
+## Submission Thesis
+
+ReproBench Agent is built around one judging promise: every important claim in the submission should point to a reproducible artifact. The project is not asking judges to trust a demo narrative alone. It includes a benchmark suite, generated evidence reports, MCP-facing tools, security tests, CI checks, and a public dashboard generated from committed JSON artifacts.
+
+The fastest way to review the project is:
+
+1. Open the public dashboard.
+2. Check the `5/5` benchmark verdict match.
+3. Inspect the `data_leakage` report.
+4. Run `make ci` or `make mcp-demo` locally.
+
 ## Problem
 
 Machine learning projects often depend on notebooks, dependencies, random seeds, metrics, and data preparation details that are hard to verify quickly. A result can look strong while being fragile, incomplete, or misleading. This is especially familiar in Kaggle-style workflows: a notebook may report a high score, but a reviewer still needs to know whether the result reproduces, whether the metric matches the claim, whether the environment is complete, and whether there are warning signs such as data leakage.
@@ -86,6 +97,9 @@ Generated evidence artifacts:
 - `reports/sample/data_leakage/report.md`
 - `reports/sample/dashboard/index.html`
 - `docs/index.html` for GitHub Pages
+- `docs/evidence_matrix.md`
+
+The evidence matrix is the judging index for the project. It maps each core claim to a proof artifact and a command: agent workflow, benchmark coverage, data leakage behavior, MCP tools, security controls, public dashboard generation, and CI-backed reproducibility.
 
 ## Demo Commands
 
@@ -98,11 +112,10 @@ make dashboard
 make mcp-demo
 ```
 
-The static dashboard summarizes benchmark coverage, the data leakage verdict, audit findings, and the tool trace in one page.
+The static dashboard summarizes benchmark coverage, the data leakage verdict, audit findings, judging evidence, and the tool trace in one page.
 
 ## Limitations and Future Work
 
 The current benchmark is intentionally small and controlled. This makes the demo reproducible and easy to judge, but it is not yet a broad arbitrary-repository auditor. Future work should add notebook execution, containerized sandboxing, richer leakage heuristics, and LLM-backed claim extraction from Kaggle notebooks, papers, or README files.
 
 The current project prioritizes the core principle: an agent should not merely answer whether a claim is believable. It should gather evidence, run checks, preserve the trace, and make the review reproducible.
-

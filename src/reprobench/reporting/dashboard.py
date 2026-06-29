@@ -38,6 +38,7 @@ def build_dashboard_html(benchmark_summary: dict[str, Any], evidence_report: dic
     finding_items = "\n".join(_finding_item(finding) for finding in findings) or (
         "<li class=\"finding-item finding-empty\">No audit findings were reported.</li>"
     )
+    evidence_rows = "\n".join(_evidence_row(row) for row in _judging_evidence_rows())
     style = _dashboard_style()
 
     return f"""<!doctype html>
@@ -176,6 +177,23 @@ def build_dashboard_html(benchmark_summary: dict[str, Any], evidence_report: dic
             {_artifact_card("Data leakage report", str(verdict), "report.md + report.json", "https://github.com/qu1nty9/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/blob/main/reports/sample/data_leakage/report.md", "shield")}
             {_artifact_card("Static dashboard", "GitHub Pages ready", "docs/index.html", "https://qu1nty9.github.io/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/", "external")}
             {_artifact_card("MCP demo trace", f"{len(tool_calls)} tool calls", "audit_case", "https://github.com/qu1nty9/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/blob/main/docs/mcp_server.md", "status")}
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="matrix-title">
+          <div class="section-title">
+            <h2 id="matrix-title">Judging Evidence Matrix</h2>
+            <span class="badge tone-info">Claim to proof</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Rubric Lens</th><th>Proof Artifact</th><th>Verification</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                {evidence_rows}
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -537,6 +555,7 @@ def _dashboard_style() -> str:
     .tone-success,
     .status-ok,
     .status-matched,
+    .status-complete,
     .status-completed,
     .severity-info {
       background: var(--success-soft);
@@ -1159,6 +1178,55 @@ def _case_row(case: dict[str, Any]) -> str:
         f"<td data-label=\"Actual\">{_code(case.get('actual_verdict', 'unknown'))}</td>"
         f"<td data-label=\"Status\"><span class=\"status status-{status_class}\">"
         f"{status_text}</span></td>"
+        "</tr>"
+    )
+
+
+def _judging_evidence_rows() -> list[dict[str, str]]:
+    return [
+        {
+            "lens": "Agent workflow",
+            "artifact": "workflow.py + data_leakage report",
+            "verification": "make sample-report",
+            "status": "complete",
+        },
+        {
+            "lens": "Evaluation",
+            "artifact": "5-case benchmark summary",
+            "verification": "make audit-cases",
+            "status": "complete",
+        },
+        {
+            "lens": "MCP tools",
+            "artifact": "MCP tool registry and audit_case trace",
+            "verification": "make mcp-demo",
+            "status": "complete",
+        },
+        {
+            "lens": "Safety",
+            "artifact": "path policy, secret scan, redaction tests",
+            "verification": "make test",
+            "status": "complete",
+        },
+        {
+            "lens": "Public demo",
+            "artifact": "GitHub Pages dashboard from evidence JSON",
+            "verification": "make pages",
+            "status": "complete",
+        },
+    ]
+
+
+def _evidence_row(row: dict[str, str]) -> str:
+    status = row.get("status", "unknown")
+    return (
+        "<tr>"
+        f"<td data-label=\"Rubric Lens\"><span class=\"tool-name\">"
+        f"{html.escape(row.get('lens', 'Evidence'))}</span></td>"
+        f"<td data-label=\"Proof Artifact\">{html.escape(row.get('artifact', ''))}</td>"
+        f"<td data-label=\"Verification\">{_code(row.get('verification', ''))}</td>"
+        f"<td data-label=\"Status\"><span class=\"status status-{_status_class(status)}\">"
+        f"{html.escape(status)}</span></td>"
         "</tr>"
     )
 

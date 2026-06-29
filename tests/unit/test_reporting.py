@@ -106,6 +106,7 @@ class ReportingTest(TestCase):
         self.assertIn("ReproBench Agent Demo Dashboard", html)
         self.assertIn("ReproBench Evidence Project", html)
         self.assertIn("Evidence Attachments", html)
+        self.assertIn("Judging Evidence Matrix", html)
         self.assertIn("Potential target leakage", html)
         self.assertIn("detect_data_leakage", html)
         self.assertIn('data-label="Evidence"', html)

@@ -7,6 +7,7 @@ Use this checklist before submitting the Kaggle Writeup.
 - Kaggle Writeup under 2,500 words.
 - Final writeup draft: `docs/kaggle_writeup_final.md`.
 - Final video script: `docs/video_script_final.md`.
+- Judging evidence matrix: `docs/evidence_matrix.md`.
 - Cover image: `docs/assets/reprobench-cover.png`.
 - Cover source: `docs/assets/reprobench-cover.svg`.
 - Submission bundle: `docs/submission_bundle.md`.
@@ -48,6 +49,7 @@ Expected results:
 - [Static demo dashboard](../reports/sample/dashboard/index.html)
 - [GitHub Pages dashboard](index.html)
 - [Architecture](architecture.md)
+- [Judging evidence matrix](evidence_matrix.md)
 - [MCP server](mcp_server.md)
 - [Security model](security.md)
 - [Final Kaggle writeup draft](kaggle_writeup_final.md)
@@ -60,10 +62,11 @@ Expected results:
 
 1. Show the problem: ML claims are often hard to verify.
 2. Run `make audit-cases`.
-3. Run `make mcp-demo`.
-4. Open `reports/sample/data_leakage/report.md`.
-5. Point out `validate_path_policy`, `scan_for_secrets`, `detect_data_leakage`, `run_python_script`, and `compare_metric`.
-6. Close with the benchmark summary: `5/5` expected verdicts matched.
+3. Show `docs/evidence_matrix.md` or the dashboard evidence matrix section.
+4. Run `make mcp-demo`.
+5. Open `reports/sample/data_leakage/report.md`.
+6. Point out `validate_path_policy`, `scan_for_secrets`, `detect_data_leakage`, `run_python_script`, and `compare_metric`.
+7. Close with the benchmark summary: `5/5` expected verdicts matched.
 
 ## Final QA
 

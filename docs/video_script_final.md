@@ -14,7 +14,9 @@ The agent reads an experiment case, extracts the claimed metric, builds a reprod
 
 The key idea is that the agent does not just answer with text. It produces artifacts: a verdict, a tool trace, findings, and reports that a reviewer can inspect.
 
-## 0:55-1:25 - Architecture
+Show the public dashboard first. Point out the `5/5` benchmark proof, the current `partially_reproduced` demo verdict, the evidence attachments, and the judging evidence matrix.
+
+## 0:55-1:25 - Architecture and Evidence Map
 
 Show `docs/architecture.md`.
 
@@ -28,6 +30,8 @@ Mention the main tools:
 - `run_python_script`
 - `compare_metric`
 - `export_case_report`
+
+Then show `docs/evidence_matrix.md`. Explain that every major project claim is linked to a concrete artifact and verification command.
 
 ## 1:25-2:10 - Benchmark Proof
 
@@ -49,7 +53,7 @@ Then run:
 make benchmark-report
 ```
 
-Open `reports/sample/benchmark/benchmark_summary.md`.
+Open `reports/sample/benchmark/benchmark_summary.md` or the benchmark section of the dashboard.
 
 ## 2:10-3:20 - Main Demo: Data Leakage
 
@@ -60,7 +64,7 @@ make sample-report
 make dashboard
 ```
 
-Open `reports/sample/dashboard/index.html`.
+Open `reports/sample/dashboard/index.html` if the public dashboard is not already open.
 
 Explain:
 
@@ -99,5 +103,4 @@ Then mention security controls:
 
 ReproBench Agent turns ML claims into auditable evidence. It is built for reviewers, Kaggle users, and data scientists who need more than a confident answer. They need a reproducible audit trail.
 
-Close with the dashboard and the benchmark result: `5/5` expected verdicts matched.
-
+Close with the dashboard evidence matrix and the benchmark result: `5/5` expected verdicts matched.

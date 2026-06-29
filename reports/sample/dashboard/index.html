@@ -287,6 +287,7 @@
     .tone-success,
     .status-ok,
     .status-matched,
+    .status-complete,
     .status-completed,
     .severity-info {
       background: var(--success-soft);
@@ -973,6 +974,27 @@
             <a class="attachment" href="https://github.com/qu1nty9/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/blob/main/reports/sample/data_leakage/report.md" target="_blank" rel="noopener noreferrer"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 8.9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.5a1.3 1.3 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><div class="attachment-name">Data leakage report</div><div class="attachment-meta">partially_reproduced</div><div class="attachment-meta">report.md + report.json</div></a>
             <a class="attachment" href="https://qu1nty9.github.io/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/" target="_blank" rel="noopener noreferrer"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span><div class="attachment-name">Static dashboard</div><div class="attachment-meta">GitHub Pages ready</div><div class="attachment-meta">docs/index.html</div></a>
             <a class="attachment" href="https://github.com/qu1nty9/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/blob/main/docs/mcp_server.md" target="_blank" rel="noopener noreferrer"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div class="attachment-name">MCP demo trace</div><div class="attachment-meta">7 tool calls</div><div class="attachment-meta">audit_case</div></a>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="matrix-title">
+          <div class="section-title">
+            <h2 id="matrix-title">Judging Evidence Matrix</h2>
+            <span class="badge tone-info">Claim to proof</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Rubric Lens</th><th>Proof Artifact</th><th>Verification</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td data-label="Rubric Lens"><span class="tool-name">Agent workflow</span></td><td data-label="Proof Artifact">workflow.py + data_leakage report</td><td data-label="Verification"><code>make sample-report</code></td><td data-label="Status"><span class="status status-complete">complete</span></td></tr>
+<tr><td data-label="Rubric Lens"><span class="tool-name">Evaluation</span></td><td data-label="Proof Artifact">5-case benchmark summary</td><td data-label="Verification"><code>make audit-cases</code></td><td data-label="Status"><span class="status status-complete">complete</span></td></tr>
+<tr><td data-label="Rubric Lens"><span class="tool-name">MCP tools</span></td><td data-label="Proof Artifact">MCP tool registry and audit_case trace</td><td data-label="Verification"><code>make mcp-demo</code></td><td data-label="Status"><span class="status status-complete">complete</span></td></tr>
+<tr><td data-label="Rubric Lens"><span class="tool-name">Safety</span></td><td data-label="Proof Artifact">path policy, secret scan, redaction tests</td><td data-label="Verification"><code>make test</code></td><td data-label="Status"><span class="status status-complete">complete</span></td></tr>
+<tr><td data-label="Rubric Lens"><span class="tool-name">Public demo</span></td><td data-label="Proof Artifact">GitHub Pages dashboard from evidence JSON</td><td data-label="Verification"><code>make pages</code></td><td data-label="Status"><span class="status status-complete">complete</span></td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 

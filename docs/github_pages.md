@@ -2,7 +2,7 @@
 
 The repository includes a static dashboard that can be published as the public project demo link for Kaggle.
 
-The dashboard is generated as a project-detail evidence view: it shows the Freestyle track, current audit verdict, benchmark match rate, agent roles, generated artifacts, audit findings, and tool trace in one responsive page.
+The dashboard is generated as a project-detail evidence view: it shows the Freestyle track, current audit verdict, benchmark match rate, agent roles, generated artifacts, judging evidence matrix, audit findings, and tool trace in one responsive page.
 
 ## Local Generation
 

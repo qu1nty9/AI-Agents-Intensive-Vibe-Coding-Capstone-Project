@@ -127,6 +127,8 @@ Security details: [docs/security.md](docs/security.md).
 
 Submission checklist: [docs/submission_checklist.md](docs/submission_checklist.md).
 
+Judging evidence matrix: [docs/evidence_matrix.md](docs/evidence_matrix.md).
+
 Final writeup draft: [docs/kaggle_writeup_final.md](docs/kaggle_writeup_final.md).
 
 Final video script: [docs/video_script_final.md](docs/video_script_final.md).

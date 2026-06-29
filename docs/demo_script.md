@@ -10,6 +10,8 @@ Machine learning notebooks often make claims that are hard to verify. A score ma
 
 ReproBench Agent checks ML experiment reproducibility by reading the case, planning checks, running tools, auditing evidence, and exporting a report.
 
+Open the dashboard early and frame it as the evidence hub: benchmark proof, current verdict, generated artifacts, judging evidence matrix, findings, and tool trace.
+
 ## 1:00-1:40 - Architecture
 
 Show the architecture diagram:
@@ -22,6 +24,8 @@ Show the architecture diagram:
 - MCP tools;
 - Evidence Auditor;
 - Reporter.
+
+Then show `docs/evidence_matrix.md` and explain that each core project claim is linked to a proof artifact and a command.
 
 ## 1:40-3:30 - Live Demo
 
@@ -69,6 +73,7 @@ reprobench mcp call validate_path_policy --args-json '{"case_path":"examples/cas
 
 Open:
 
+- `docs/evidence_matrix.md`
 - `reports/sample/benchmark/benchmark_summary.md`
 - `reports/sample/data_leakage/report.md`
 - `reports/sample/dashboard/index.html`

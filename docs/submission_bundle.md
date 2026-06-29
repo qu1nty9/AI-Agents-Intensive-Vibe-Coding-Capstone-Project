@@ -14,6 +14,7 @@ This is the single handoff page for the final Kaggle submission.
 
 - Final writeup draft: [kaggle_writeup_final.md](kaggle_writeup_final.md)
 - Final video script: [video_script_final.md](video_script_final.md)
+- Judging evidence matrix: [evidence_matrix.md](evidence_matrix.md)
 - Cover image: [assets/reprobench-cover.png](assets/reprobench-cover.png)
 - Cover source: [assets/reprobench-cover.svg](assets/reprobench-cover.svg)
 - Static dashboard source: [../reports/sample/dashboard/index.html](../reports/sample/dashboard/index.html)
@@ -40,6 +41,7 @@ Expected proof points:
 - Benchmark verdicts match `5/5`.
 - The data leakage case returns `partially_reproduced`.
 - The MCP `audit_case` demo returns the same structured verdict and tool trace.
+- The judging evidence matrix links each core project claim to a reproducible artifact.
 
 ## Demo Narrative
 
