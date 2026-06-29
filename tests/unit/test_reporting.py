@@ -104,8 +104,11 @@ class ReportingTest(TestCase):
         html = build_dashboard_html(benchmark_summary, evidence_report)
 
         self.assertIn("ReproBench Agent Demo Dashboard", html)
+        self.assertIn("ReproBench Evidence Project", html)
+        self.assertIn("Evidence Attachments", html)
         self.assertIn("Potential target leakage", html)
         self.assertIn("detect_data_leakage", html)
+        self.assertIn('data-label="Evidence"', html)
 
     def test_write_dashboard_writes_html_file(self):
         with tempfile.TemporaryDirectory() as temp_dir:
