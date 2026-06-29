@@ -9,6 +9,8 @@ from pathlib import Path
 from reprobench import __version__
 from reprobench.agents.workflow import build_initial_plan, run_foundation_workflow
 from reprobench.benchmark import list_case_specs, validate_all_cases, validate_case_directory
+from reprobench.mcp_server import call_tool, list_tools
+from reprobench.mcp_server.json_stdio import serve_json_stdio
 from reprobench.reporting import report_to_dict, write_report_bundle
 
 
@@ -81,6 +83,27 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional directory for writing report.md and report.json.",
     )
 
+    mcp_parser = subparsers.add_parser("mcp", help="Inspect or serve ReproBench MCP tools.")
+    mcp_subparsers = mcp_parser.add_subparsers(dest="mcp_command")
+    mcp_subparsers.add_parser("list-tools", help="List MCP-exposed tool schemas.")
+
+    mcp_call_parser = mcp_subparsers.add_parser("call", help="Call an MCP-exposed tool.")
+    mcp_call_parser.add_argument("tool_name", help="Registered tool name.")
+    mcp_call_parser.add_argument(
+        "--args-json",
+        default="{}",
+        help="JSON object passed as tool arguments.",
+    )
+
+    mcp_subparsers.add_parser(
+        "serve-json",
+        help="Run the dependency-free JSON-lines stdio server.",
+    )
+    mcp_subparsers.add_parser(
+        "serve-fastmcp",
+        help="Run the optional FastMCP server. Requires installing .[mcp].",
+    )
+
     return parser
 
 
@@ -116,7 +139,41 @@ def main(argv: list[str] | None = None) -> int:
             print_report(report)
         return 0
 
+    if args.command == "mcp":
+        return handle_mcp_command(args, parser)
+
     parser.error(f"unknown command: {args.command}")
+    return 2
+
+
+def handle_mcp_command(args: argparse.Namespace, parser: argparse.ArgumentParser) -> int:
+    if args.mcp_command is None:
+        parser.error("mcp requires a subcommand")
+
+    if args.mcp_command == "list-tools":
+        print(json.dumps({"tools": list_tools()}, indent=2))
+        return 0
+
+    if args.mcp_command == "call":
+        try:
+            arguments = json.loads(args.args_json)
+        except json.JSONDecodeError as exc:
+            parser.error(f"--args-json must be a JSON object: {exc}")
+        if not isinstance(arguments, dict):
+            parser.error("--args-json must decode to a JSON object")
+        print(json.dumps(call_tool(args.tool_name, arguments), indent=2))
+        return 0
+
+    if args.mcp_command == "serve-json":
+        return serve_json_stdio()
+
+    if args.mcp_command == "serve-fastmcp":
+        from reprobench.mcp_server.server import main as mcp_main
+
+        mcp_main()
+        return 0
+
+    parser.error(f"unknown mcp subcommand: {args.mcp_command}")
     return 2
 
 
@@ -175,7 +232,7 @@ def print_info() -> None:
     print("ReproBench Agent")
     print(f"Version: {__version__}")
     print("Track: Kaggle Freestyle")
-    print("Milestone: 3 - evidence report export")
+    print("Milestone: 4 - MCP tool wrapper")
     print("Thesis: Turn ML claims into reproducible, auditable evidence.")
 
 

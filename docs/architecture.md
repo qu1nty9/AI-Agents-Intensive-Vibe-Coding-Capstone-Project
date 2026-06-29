@@ -101,18 +101,16 @@ Exports markdown and JSON reports with verdict, trace, findings, and recommended
 
 ## MCP Tools
 
-Planned MCP tools:
+Implemented MCP-facing tools:
 
-- `inspect_notebook(path)`
-- `extract_notebook_metadata(path)`
-- `run_notebook(path, timeout_seconds)`
-- `run_python_script(path, timeout_seconds)`
-- `compare_metric(expected, actual, tolerance)`
-- `detect_missing_seed(path)`
-- `detect_data_leakage(dataset_path, target_column)`
-- `scan_for_secrets(path)`
-- `export_report(run_id, format)`
-- `save_trace(run_id)`
+- `inspect_case(case_path)`
+- `audit_case(case_path)`
+- `run_case_artifact(script_path, timeout_seconds)`
+- `compare_claim_metric(metric_name, expected_value, actual_value, tolerance)`
+- `detect_seed_issue(script_path)`
+- `detect_leakage(dataset_path, target_column)`
+- `scan_case_for_secrets(path)`
+- `export_case_report(case_path, output_dir)`
 
 ## Verdicts
 

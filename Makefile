@@ -1,7 +1,7 @@
 PYTHON ?= python3
 PYTHONPATH := src
 
-.PHONY: help info cases validate-cases audit-cases sample-report plan demo test compile
+.PHONY: help info cases validate-cases audit-cases sample-report mcp-tools mcp-demo plan demo test compile
 
 help:
 	@echo "ReproBench Agent commands"
@@ -10,6 +10,8 @@ help:
 	@echo "  make validate-cases"
 	@echo "  make audit-cases"
 	@echo "  make sample-report"
+	@echo "  make mcp-tools"
+	@echo "  make mcp-demo"
 	@echo "  make plan     Show the foundation reproduction plan"
 	@echo "  make demo     Run the milestone-0 demo flow"
 	@echo "  make test     Run unit and integration tests"
@@ -30,6 +32,12 @@ audit-cases:
 sample-report:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench run examples/cases/data_leakage --output-dir reports/sample/data_leakage
 
+mcp-tools:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench mcp list-tools
+
+mcp-demo:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench mcp call audit_case --args-json '{"case_path":"examples/cases/data_leakage"}'
+
 plan:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench plan examples/cases/clean_baseline
 
@@ -38,6 +46,7 @@ demo:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench cases list
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench cases validate
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench cases audit
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench mcp call audit_case --args-json '{"case_path":"examples/cases/data_leakage"}'
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench plan examples/cases/clean_baseline
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench run examples/cases/clean_baseline
 

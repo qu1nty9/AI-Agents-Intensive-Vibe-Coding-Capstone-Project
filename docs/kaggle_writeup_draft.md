@@ -33,7 +33,7 @@ The system uses a coordinator workflow with specialized responsibilities:
 
 ## MCP and Tools
 
-The final implementation will expose core capabilities as MCP tools, including notebook inspection, execution, metric comparison, secret scanning, leakage checks, and report export.
+The implementation exposes core capabilities as MCP-facing tools, including case inspection, audit execution, metric comparison, secret scanning, leakage checks, and report export.
 
 ## Security
 

@@ -49,6 +49,13 @@ Also show the full benchmark proof:
 reprobench cases audit
 ```
 
+Show the MCP-facing tool wrapper:
+
+```bash
+reprobench mcp list-tools
+reprobench mcp call audit_case --args-json '{"case_path":"examples/cases/data_leakage"}'
+```
+
 ## 3:30-4:20 - Evidence and Safety
 
 Show sample reports and tests. Mention that untrusted code is treated carefully through secret scanning, allowlists, timeouts, and redaction.

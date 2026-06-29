@@ -79,3 +79,34 @@ class CliTest(TestCase):
 
             self.assertEqual(result.returncode, 0)
             self.assertIn("Wrote report", result.stdout)
+
+    def test_mcp_list_tools_command_runs(self):
+        result = subprocess.run(
+            [sys.executable, "-m", "reprobench", "mcp", "list-tools"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("audit_case", result.stdout)
+
+    def test_mcp_call_command_runs(self):
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "reprobench",
+                "mcp",
+                "call",
+                "audit_case",
+                "--args-json",
+                '{"case_path":"examples/cases/clean_baseline"}',
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0)
+        self.assertIn('"verdict": "reproduced"', result.stdout)

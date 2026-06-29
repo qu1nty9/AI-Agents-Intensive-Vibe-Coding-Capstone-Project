@@ -23,7 +23,7 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 3 is complete: repository foundation, benchmark case suite, local core audit tools, and evidence report export.
+Milestone 4 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, and MCP tool wrapper.
 
 Implemented now:
 
@@ -35,12 +35,12 @@ Implemented now:
 - Local tools for script execution, metric comparison, missing seed detection, leakage detection, secret scanning, and execution error classification.
 - `cases audit` command that verifies actual verdicts against expected benchmark verdicts.
 - Markdown and JSON report export via `reprobench run --output-dir`.
+- MCP-facing tool registry with optional FastMCP server and dependency-free JSON-lines smoke server.
 - Documentation skeleton for architecture, demo, and Kaggle writeup.
 - Unit and integration tests for CLI, workflow contracts, tools, reports, and case validation.
 
 Coming next:
 
-- MCP server wrapper for core tools.
 - Security layer for untrusted experiment execution.
 
 ## Quickstart
@@ -53,6 +53,8 @@ PYTHONPATH=src python3 -m reprobench info
 PYTHONPATH=src python3 -m reprobench cases list
 PYTHONPATH=src python3 -m reprobench cases validate
 PYTHONPATH=src python3 -m reprobench cases audit
+PYTHONPATH=src python3 -m reprobench mcp list-tools
+PYTHONPATH=src python3 -m reprobench mcp call audit_case --args-json '{"case_path":"examples/cases/data_leakage"}'
 PYTHONPATH=src python3 -m reprobench plan examples/cases/clean_baseline
 PYTHONPATH=src python3 -m reprobench run examples/cases/clean_baseline
 PYTHONPATH=src python3 -m reprobench run examples/cases/data_leakage --output-dir reports/sample/data_leakage
@@ -80,6 +82,8 @@ make test
 make demo
 make audit-cases
 make sample-report
+make mcp-tools
+make mcp-demo
 ```
 
 If you install the optional development dependencies, `pytest` can also run the same tests:
@@ -100,6 +104,8 @@ The target architecture is a multi-step agent workflow:
 - **Reporter**: exports markdown and JSON evidence reports.
 
 More detail: [docs/architecture.md](docs/architecture.md).
+
+MCP details: [docs/mcp_server.md](docs/mcp_server.md).
 
 ## Benchmark Suite
 
