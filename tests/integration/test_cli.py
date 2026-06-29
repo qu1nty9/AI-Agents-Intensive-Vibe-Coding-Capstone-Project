@@ -60,6 +60,26 @@ class CliTest(TestCase):
         self.assertEqual(result.returncode, 0)
         self.assertIn("Expected verdicts matched: 5/5", result.stdout)
 
+    def test_cases_audit_command_writes_summary(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "reprobench",
+                    "cases",
+                    "audit",
+                    "--output-dir",
+                    temp_dir,
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(result.returncode, 0)
+            self.assertIn("Wrote benchmark summary", result.stdout)
+
     def test_run_command_writes_report_bundle(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             result = subprocess.run(

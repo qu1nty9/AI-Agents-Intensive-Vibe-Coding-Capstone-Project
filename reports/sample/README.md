@@ -9,3 +9,9 @@ Generate the current sample report:
 ```bash
 make sample-report
 ```
+
+Generate the benchmark summary:
+
+```bash
+make benchmark-report
+```

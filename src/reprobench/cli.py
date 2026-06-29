@@ -11,7 +11,7 @@ from reprobench.agents.workflow import build_initial_plan, run_foundation_workfl
 from reprobench.benchmark import list_case_specs, validate_all_cases, validate_case_directory
 from reprobench.mcp_server import call_tool, list_tools
 from reprobench.mcp_server.json_stdio import serve_json_stdio
-from reprobench.reporting import report_to_dict, write_report_bundle
+from reprobench.reporting import report_to_dict, write_benchmark_summary, write_report_bundle
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -66,6 +66,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Root directory containing benchmark cases.",
     )
     cases_audit_parser.add_argument("--json", action="store_true", help="Print JSON output.")
+    cases_audit_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        help="Optional directory for writing benchmark_summary.md and benchmark_summary.json.",
+    )
 
     plan_parser = subparsers.add_parser("plan", help="Create a reproduction plan for a case.")
     plan_parser.add_argument("case_path", type=Path, help="Path to an experiment case.")
@@ -205,19 +210,11 @@ def handle_cases_command(args: argparse.Namespace, parser: argparse.ArgumentPars
         return 0 if all(result.valid for result in results) else 1
 
     if args.cases_command == "audit":
-        rows = []
-        for spec in list_case_specs(args.root):
-            report = run_foundation_workflow(spec.path)
-            expected = spec.expected_verdict.value if spec.expected_verdict else None
-            actual = report.verdict.value
-            rows.append(
-                {
-                    "name": spec.name,
-                    "expected_verdict": expected,
-                    "actual_verdict": actual,
-                    "matched": expected == actual,
-                }
-            )
+        rows = build_audit_rows(args.root)
+        if args.output_dir:
+            markdown_path, json_path = write_benchmark_summary(rows, args.output_dir)
+            print(f"Wrote benchmark summary: {markdown_path}")
+            print(f"Wrote benchmark summary: {json_path}")
         if args.json:
             print(json.dumps(rows, indent=2))
         else:
@@ -232,7 +229,7 @@ def print_info() -> None:
     print("ReproBench Agent")
     print(f"Version: {__version__}")
     print("Track: Kaggle Freestyle")
-    print("Milestone: 5 - security hardening")
+    print("Milestone: 6 - submission polish")
     print("Thesis: Turn ML claims into reproducible, auditable evidence.")
 
 
@@ -279,6 +276,23 @@ def print_audit_rows(rows: list[dict]) -> None:
             f"- {row['name']}: expected={row['expected_verdict']} "
             f"actual={row['actual_verdict']} [{status}]"
         )
+
+
+def build_audit_rows(root: Path) -> list[dict]:
+    rows = []
+    for spec in list_case_specs(root):
+        report = run_foundation_workflow(spec.path)
+        expected = spec.expected_verdict.value if spec.expected_verdict else None
+        actual = report.verdict.value
+        rows.append(
+            {
+                "name": spec.name,
+                "expected_verdict": expected,
+                "actual_verdict": actual,
+                "matched": expected == actual,
+            }
+        )
+    return rows
 
 
 def case_spec_to_dict(spec) -> dict:

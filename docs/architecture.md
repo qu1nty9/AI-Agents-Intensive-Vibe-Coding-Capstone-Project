@@ -15,31 +15,34 @@ The system should be judged by artifacts, not by conversational polish:
 
 ## Target Workflow
 
-```text
-User / Demo Case
-      |
-      v
-Benchmark Case Loader
-      |
-      v
-Coordinator Agent
-      |
-      +--> Claim Extractor
-      |
-      +--> Reproduction Planner
-      |
-      +--> Security Guard
-      |
-      +--> Execution Agent
-      |        |
-      |        v
-      |    MCP Tools
-      |
-      +--> Evidence Auditor
-      |
-      v
-Report Generator
+```mermaid
+flowchart TD
+    User["User or demo case"] --> Loader["Benchmark Case Loader"]
+    Loader --> Coordinator["Coordinator Agent"]
+
+    Coordinator --> Claim["Claim Extractor"]
+    Coordinator --> Planner["Reproduction Planner"]
+    Coordinator --> Guard["Security Guard"]
+    Coordinator --> Executor["Execution Agent"]
+    Coordinator --> Auditor["Evidence Auditor"]
+    Coordinator --> Reporter["Report Generator"]
+
+    Guard --> PathPolicy["validate_path_policy"]
+    Guard --> SecretScan["scan_for_secrets"]
+    Guard --> Redaction["redaction"]
+
+    Executor --> MCP["MCP-facing Tool Registry"]
+    MCP --> RunScript["run_case_artifact"]
+    MCP --> Metric["compare_claim_metric"]
+    MCP --> Seed["detect_seed_issue"]
+    MCP --> Leakage["detect_leakage"]
+
+    Auditor --> Verdict["Final Verdict"]
+    Reporter --> Markdown["report.md"]
+    Reporter --> Json["report.json"]
 ```
+
+The same core tools are available through the CLI and through the MCP-facing registry, so the demo path and the agent/tool path exercise the same implementation.
 
 ## Agent Responsibilities
 

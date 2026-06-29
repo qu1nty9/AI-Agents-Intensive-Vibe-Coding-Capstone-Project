@@ -1,0 +1,37 @@
+{
+  "total_cases": 5,
+  "matched_cases": 5,
+  "match_rate": 1.0,
+  "cases": [
+    {
+      "name": "clean_baseline",
+      "expected_verdict": "reproduced",
+      "actual_verdict": "reproduced",
+      "matched": true
+    },
+    {
+      "name": "data_leakage",
+      "expected_verdict": "partially_reproduced",
+      "actual_verdict": "partially_reproduced",
+      "matched": true
+    },
+    {
+      "name": "metric_mismatch",
+      "expected_verdict": "not_reproduced",
+      "actual_verdict": "not_reproduced",
+      "matched": true
+    },
+    {
+      "name": "missing_dependency",
+      "expected_verdict": "blocked",
+      "actual_verdict": "blocked",
+      "matched": true
+    },
+    {
+      "name": "seed_instability",
+      "expected_verdict": "partially_reproduced",
+      "actual_verdict": "partially_reproduced",
+      "matched": true
+    }
+  ]
+}

@@ -23,7 +23,7 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 5 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, MCP tool wrapper, and security hardening.
+Milestone 6 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, MCP tool wrapper, security hardening, and submission polish.
 
 Implemented now:
 
@@ -35,8 +35,10 @@ Implemented now:
 - Local tools for script execution, metric comparison, missing seed detection, leakage detection, secret scanning, and execution error classification.
 - `cases audit` command that verifies actual verdicts against expected benchmark verdicts.
 - Markdown and JSON report export via `reprobench run --output-dir`.
+- Benchmark summary export for Kaggle evidence artifacts.
 - MCP-facing tool registry with optional FastMCP server and dependency-free JSON-lines smoke server.
 - Security controls for path policy, secret scanning, redaction, and execution timeouts.
+- Submission checklist, Mermaid architecture diagram, expanded video script, and writeup draft.
 - Documentation skeleton for architecture, demo, and Kaggle writeup.
 - Unit and integration tests for CLI, workflow contracts, tools, reports, and case validation.
 
@@ -54,6 +56,7 @@ PYTHONPATH=src python3 -m reprobench info
 PYTHONPATH=src python3 -m reprobench cases list
 PYTHONPATH=src python3 -m reprobench cases validate
 PYTHONPATH=src python3 -m reprobench cases audit
+PYTHONPATH=src python3 -m reprobench cases audit --output-dir reports/sample/benchmark
 PYTHONPATH=src python3 -m reprobench mcp list-tools
 PYTHONPATH=src python3 -m reprobench mcp call audit_case --args-json '{"case_path":"examples/cases/data_leakage"}'
 PYTHONPATH=src python3 -m reprobench plan examples/cases/clean_baseline
@@ -82,6 +85,7 @@ Or use the included Makefile:
 make test
 make demo
 make audit-cases
+make benchmark-report
 make sample-report
 make mcp-tools
 make mcp-demo
@@ -110,6 +114,8 @@ MCP details: [docs/mcp_server.md](docs/mcp_server.md).
 
 Security details: [docs/security.md](docs/security.md).
 
+Submission checklist: [docs/submission_checklist.md](docs/submission_checklist.md).
+
 ## Benchmark Suite
 
 The initial benchmark suite lives in [examples/cases](examples/cases). Schema and design rules are documented in [docs/benchmark_cases.md](docs/benchmark_cases.md).
@@ -125,6 +131,7 @@ Validate and audit the suite with:
 ```bash
 make validate-cases
 make audit-cases
+make benchmark-report
 ```
 
 ## Repository Layout

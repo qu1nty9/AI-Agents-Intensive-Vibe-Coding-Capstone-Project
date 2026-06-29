@@ -30,7 +30,8 @@ Recommended final demo case: `data_leakage`.
 Show:
 
 ```bash
-reprobench run examples/cases/data_leakage
+make benchmark-report
+make sample-report
 ```
 
 Then open the generated report and point out:
@@ -46,14 +47,14 @@ Then open the generated report and point out:
 Also show the full benchmark proof:
 
 ```bash
-reprobench cases audit
+make audit-cases
 ```
 
 Show the MCP-facing tool wrapper:
 
 ```bash
-reprobench mcp list-tools
-reprobench mcp call audit_case --args-json '{"case_path":"examples/cases/data_leakage"}'
+make mcp-tools
+make mcp-demo
 ```
 
 ## 3:30-4:20 - Evidence and Safety
@@ -63,6 +64,11 @@ Show sample reports and tests. Mention that untrusted code is treated carefully 
 ```bash
 reprobench mcp call validate_path_policy --args-json '{"case_path":"examples/cases/data_leakage"}'
 ```
+
+Open:
+
+- `reports/sample/benchmark/benchmark_summary.md`
+- `reports/sample/data_leakage/report.md`
 
 ## 4:20-5:00 - Close
 
