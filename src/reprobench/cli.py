@@ -232,7 +232,7 @@ def print_info() -> None:
     print("ReproBench Agent")
     print(f"Version: {__version__}")
     print("Track: Kaggle Freestyle")
-    print("Milestone: 4 - MCP tool wrapper")
+    print("Milestone: 5 - security hardening")
     print("Thesis: Turn ML claims into reproducible, auditable evidence.")
 
 

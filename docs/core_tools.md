@@ -7,6 +7,7 @@ Milestone 2 adds deterministic local tools that let ReproBench produce real verd
 | Tool | Purpose |
 | --- | --- |
 | `scan_for_secrets` | Stops execution if secret-like values are present in case files. |
+| `validate_path_policy` | Rejects artifact or dataset paths that leave the case directory. |
 | `run_python_script` | Runs a Python artifact with timeout and captures stdout/stderr. |
 | `parse_last_json_object` | Reads the final JSON metric object from script stdout. |
 | `compare_metric` | Compares observed metric against the case claim and tolerance. |
@@ -35,6 +36,7 @@ This milestone moves the project beyond a skeleton. The agent can now produce ev
 - missing seed flagged;
 - missing dependency classified as blocked;
 - target leakage detected even when the metric reproduces.
+- unsafe path and secret patterns blocked before execution.
 
 ## Report Export
 

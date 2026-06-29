@@ -37,7 +37,7 @@ The implementation exposes core capabilities as MCP-facing tools, including case
 
 ## Security
 
-The agent treats notebooks and experiment files as untrusted inputs. Planned controls include secret scanning, path allowlists, execution timeouts, and redaction.
+The agent treats notebooks and experiment files as untrusted inputs. Implemented controls include secret scanning, path policy checks, execution timeouts, and redaction.
 
 ## Evidence
 

@@ -12,6 +12,7 @@ from typing import Any, Callable
 
 from reprobench.benchmark import load_case_spec
 from reprobench.reporting import report_to_dict, write_report_bundle
+from reprobench.security import display_path, validate_case_path_policy
 from reprobench.tools import (
     compare_metric,
     detect_data_leakage,
@@ -64,8 +65,8 @@ def inspect_case(arguments: dict[str, Any]) -> dict[str, Any]:
         "name": spec.name,
         "title": spec.title,
         "description": spec.description,
-        "artifact_path": str(spec.artifact_path) if spec.artifact_path else None,
-        "dataset_path": str(spec.dataset_path) if spec.dataset_path else None,
+        "artifact_path": display_path(spec.artifact_path) if spec.artifact_path else None,
+        "dataset_path": display_path(spec.dataset_path) if spec.dataset_path else None,
         "target_column": spec.target_column,
         "expected_verdict": spec.expected_verdict.value if spec.expected_verdict else None,
         "failure_mode": spec.failure_mode,
@@ -139,6 +140,12 @@ def detect_leakage(arguments: dict[str, Any]) -> dict[str, Any]:
 
 def scan_case_for_secrets(arguments: dict[str, Any]) -> dict[str, Any]:
     findings = scan_for_secrets(Path(_required(arguments, "path")))
+    return {"findings": [_finding_to_dict(finding) for finding in findings]}
+
+
+def validate_path_policy(arguments: dict[str, Any]) -> dict[str, Any]:
+    spec = load_case_spec(Path(_required(arguments, "case_path")))
+    findings = validate_case_path_policy(spec)
     return {"findings": [_finding_to_dict(finding) for finding in findings]}
 
 
@@ -251,6 +258,15 @@ TOOL_REGISTRY: dict[str, ToolSpec] = {
         ),
         handler=scan_case_for_secrets,
     ),
+    "validate_path_policy": ToolSpec(
+        name="validate_path_policy",
+        description="Validate that case artifact and dataset paths stay inside the case directory.",
+        input_schema=_schema(
+            {"case_path": {"type": "string"}},
+            ["case_path"],
+        ),
+        handler=validate_path_policy,
+    ),
     "export_case_report": ToolSpec(
         name="export_case_report",
         description="Run an audit and export Markdown and JSON report files.",
@@ -264,4 +280,3 @@ TOOL_REGISTRY: dict[str, ToolSpec] = {
         handler=export_case_report,
     ),
 }
-

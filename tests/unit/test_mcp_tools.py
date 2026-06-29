@@ -15,6 +15,7 @@ class McpToolsTest(TestCase):
         self.assertIn("inspect_case", names)
         self.assertIn("audit_case", names)
         self.assertIn("detect_leakage", names)
+        self.assertIn("validate_path_policy", names)
         self.assertIn("export_case_report", names)
 
     def test_audit_case_tool_returns_expected_verdict(self):
@@ -72,4 +73,3 @@ class McpToolsTest(TestCase):
 
         self.assertEqual(response["id"], 2)
         self.assertEqual(response["result"]["name"], "clean_baseline")
-

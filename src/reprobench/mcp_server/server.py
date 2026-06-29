@@ -82,6 +82,12 @@ def build_server():
         return call_tool("scan_case_for_secrets", {"path": path})
 
     @mcp.tool()
+    def validate_path_policy(case_path: str) -> dict:
+        """Validate that case artifact and dataset paths stay inside the case directory."""
+
+        return call_tool("validate_path_policy", {"case_path": case_path})
+
+    @mcp.tool()
     def export_case_report(case_path: str, output_dir: str) -> dict:
         """Run an audit and export Markdown and JSON report files."""
 
@@ -99,4 +105,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

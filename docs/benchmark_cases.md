@@ -62,6 +62,7 @@ Expected verdicts matched: 5/5
 
 - Keep cases tiny enough to run during a video demo.
 - Use local data only.
+- Keep artifact and dataset paths relative to the case directory.
 - Make the expected verdict explicit.
 - Prefer deterministic scripts unless the case is intentionally about instability.
 - Keep failure modes intentional and documented.

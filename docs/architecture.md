@@ -70,6 +70,13 @@ Creates the protocol the tools should execute. A plan should be specific enough 
 
 Prevents unsafe execution by scanning inputs, enforcing path boundaries, applying timeouts, and redacting secrets.
 
+Implemented controls:
+
+- `validate_path_policy` rejects absolute paths and traversal out of a case directory;
+- `scan_for_secrets` stops runs with secret-like values;
+- execution output is redacted before reports are written;
+- Python artifact execution uses timeouts and avoids shell commands from case specs.
+
 ### Execution Agent
 
 Invokes script and dataset tools. It does not silently execute arbitrary commands.
@@ -110,6 +117,7 @@ Implemented MCP-facing tools:
 - `detect_seed_issue(script_path)`
 - `detect_leakage(dataset_path, target_column)`
 - `scan_case_for_secrets(path)`
+- `validate_path_policy(case_path)`
 - `export_case_report(case_path, output_dir)`
 
 ## Verdicts

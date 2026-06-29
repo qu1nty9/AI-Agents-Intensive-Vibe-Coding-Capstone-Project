@@ -2,18 +2,10 @@
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 from reprobench.models import AuditFinding
-
-SECRET_PATTERNS = (
-    re.compile(r"AKIA[0-9A-Z]{16}"),
-    re.compile(r"sk-[A-Za-z0-9_-]{20,}"),
-    re.compile(r"AIza[0-9A-Za-z_-]{20,}"),
-    re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
-    re.compile(r"(?i)(api[_-]?key|password|secret|token)\s*=\s*['\"][^'\"]{8,}['\"]"),
-)
+from reprobench.security.redaction import SECRET_PATTERNS
 
 TEXT_SUFFIXES = {".py", ".json", ".md", ".txt", ".csv", ".yaml", ".yml"}
 
@@ -39,4 +31,3 @@ def scan_for_secrets(path: Path) -> tuple[AuditFinding, ...]:
                 )
                 break
     return tuple(findings)
-

@@ -18,6 +18,7 @@
 
 - `scan_for_secrets`
 - `validate_case_path`
+- `validate_path_policy`
 - `enforce_execution_timeout`
 - `detect_data_leakage`
 - `run_python_script`
@@ -35,22 +36,27 @@
    ```json
    {"path": "examples/cases/data_leakage"}
    ```
-3. `scan_for_secrets` - **completed**
+3. `validate_path_policy` - **completed**
 
    ```json
    {"findings": 0, "path": "examples/cases/data_leakage"}
    ```
-4. `detect_data_leakage` - **completed**
+4. `scan_for_secrets` - **completed**
+
+   ```json
+   {"findings": 0, "path": "examples/cases/data_leakage"}
+   ```
+5. `detect_data_leakage` - **completed**
 
    ```json
    {"dataset_path": "examples/cases/data_leakage/toy_leakage.csv", "findings": 1, "target_column": "target"}
    ```
-5. `run_python_script` - **completed**
+6. `run_python_script` - **completed**
 
    ```json
    {"path": "examples/cases/data_leakage/experiment.py", "return_code": 0, "run_index": 1, "timed_out": false}
    ```
-6. `compare_metric` - **completed**
+7. `compare_metric` - **completed**
 
    ```json
    {"actual": 1.0, "delta": 0.0, "expected": 1.0, "metric_name": "accuracy", "tolerance": 0.0}

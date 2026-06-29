@@ -22,6 +22,7 @@ Implemented tools:
 - `detect_seed_issue`
 - `detect_leakage`
 - `scan_case_for_secrets`
+- `validate_path_policy`
 - `export_case_report`
 
 ## Tool Call Demo
@@ -76,4 +77,3 @@ PYTHONPATH=src python3 -m reprobench mcp serve-fastmcp
 ```
 
 If the MCP SDK is not installed, the command fails with an explicit setup message.
-

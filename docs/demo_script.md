@@ -58,7 +58,11 @@ reprobench mcp call audit_case --args-json '{"case_path":"examples/cases/data_le
 
 ## 3:30-4:20 - Evidence and Safety
 
-Show sample reports and tests. Mention that untrusted code is treated carefully through secret scanning, allowlists, timeouts, and redaction.
+Show sample reports and tests. Mention that untrusted code is treated carefully through path policy checks, secret scanning, timeouts, and redaction.
+
+```bash
+reprobench mcp call validate_path_policy --args-json '{"case_path":"examples/cases/data_leakage"}'
+```
 
 ## 4:20-5:00 - Close
 

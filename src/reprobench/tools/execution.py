@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from reprobench.models import ExecutionResult
+from reprobench.security import redact_text, redact_value
 
 
 def run_python_script(script_path: Path, timeout_seconds: int = 120) -> ExecutionResult:
@@ -32,22 +33,23 @@ def run_python_script(script_path: Path, timeout_seconds: int = 120) -> Executio
         return ExecutionResult(
             command=command,
             return_code=124,
-            stdout=exc.stdout or "",
-            stderr=exc.stderr or "",
+            stdout=redact_text(exc.stdout or ""),
+            stderr=redact_text(exc.stderr or ""),
             duration_seconds=duration,
             timed_out=True,
             parsed_output=None,
         )
 
     duration = time.monotonic() - started_at
+    parsed_output = parse_last_json_object(completed.stdout)
     return ExecutionResult(
         command=command,
         return_code=completed.returncode,
-        stdout=completed.stdout,
-        stderr=completed.stderr,
+        stdout=redact_text(completed.stdout),
+        stderr=redact_text(completed.stderr),
         duration_seconds=duration,
         timed_out=False,
-        parsed_output=parse_last_json_object(completed.stdout),
+        parsed_output=redact_value(parsed_output) if parsed_output is not None else None,
     )
 
 

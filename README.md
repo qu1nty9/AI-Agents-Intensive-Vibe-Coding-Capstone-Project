@@ -23,7 +23,7 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 4 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, and MCP tool wrapper.
+Milestone 5 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, MCP tool wrapper, and security hardening.
 
 Implemented now:
 
@@ -36,12 +36,13 @@ Implemented now:
 - `cases audit` command that verifies actual verdicts against expected benchmark verdicts.
 - Markdown and JSON report export via `reprobench run --output-dir`.
 - MCP-facing tool registry with optional FastMCP server and dependency-free JSON-lines smoke server.
+- Security controls for path policy, secret scanning, redaction, and execution timeouts.
 - Documentation skeleton for architecture, demo, and Kaggle writeup.
 - Unit and integration tests for CLI, workflow contracts, tools, reports, and case validation.
 
 Coming next:
 
-- Security layer for untrusted experiment execution.
+- Optional UI or polished demo surface.
 
 ## Quickstart
 
@@ -106,6 +107,8 @@ The target architecture is a multi-step agent workflow:
 More detail: [docs/architecture.md](docs/architecture.md).
 
 MCP details: [docs/mcp_server.md](docs/mcp_server.md).
+
+Security details: [docs/security.md](docs/security.md).
 
 ## Benchmark Suite
 

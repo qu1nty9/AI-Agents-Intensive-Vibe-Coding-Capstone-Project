@@ -19,6 +19,7 @@ from reprobench.models import (
     ToolCall,
     Verdict,
 )
+from reprobench.security import display_path, validate_case_path_policy
 from reprobench.tools import (
     classify_execution_error,
     compare_metric,
@@ -37,6 +38,7 @@ def build_initial_plan(case_path: Path) -> ReproductionPlan:
         (
             "scan_for_secrets",
             "validate_case_path",
+            "validate_path_policy",
             "enforce_execution_timeout",
             *checks,
         )
@@ -85,11 +87,30 @@ def run_foundation_workflow(case_path: Path) -> EvidenceReport:
     ]
     findings: list[AuditFinding] = [_spec_finding(case_path)]
 
+    path_policy_findings = validate_case_path_policy(spec)
+    tool_calls.append(
+        ToolCall(
+            "validate_path_policy",
+            {"path": display_path(spec.path), "findings": len(path_policy_findings)},
+            "completed",
+        )
+    )
+    findings.extend(path_policy_findings)
+    if path_policy_findings:
+        return _build_report(
+            spec=spec,
+            plan=plan,
+            verdict=Verdict.UNSAFE_TO_RUN,
+            tool_calls=tool_calls,
+            findings=findings,
+            summary="Audit stopped because a case path violated the execution policy.",
+        )
+
     secret_findings = scan_for_secrets(spec.path)
     tool_calls.append(
         ToolCall(
             "scan_for_secrets",
-            {"path": str(spec.path), "findings": len(secret_findings)},
+            {"path": display_path(spec.path), "findings": len(secret_findings)},
             "completed",
         )
     )
@@ -109,7 +130,7 @@ def run_foundation_workflow(case_path: Path) -> EvidenceReport:
         tool_calls.append(
             ToolCall(
                 "detect_missing_seed",
-                {"path": str(spec.artifact_path), "findings": len(seed_findings)},
+                {"path": display_path(spec.artifact_path), "findings": len(seed_findings)},
                 "completed",
             )
         )
@@ -125,7 +146,7 @@ def run_foundation_workflow(case_path: Path) -> EvidenceReport:
             ToolCall(
                 "detect_data_leakage",
                 {
-                    "dataset_path": str(spec.dataset_path),
+                    "dataset_path": display_path(spec.dataset_path),
                     "target_column": spec.target_column,
                     "findings": len(leakage_findings),
                 },
@@ -215,7 +236,7 @@ def _execute_case(spec: CaseSpec, tool_calls: list[ToolCall]) -> tuple[Execution
             ToolCall(
                 tool_name,
                 {
-                    "path": str(spec.artifact_path),
+                    "path": display_path(spec.artifact_path),
                     "run_index": run_index + 1,
                     "return_code": result.return_code,
                     "timed_out": result.timed_out,

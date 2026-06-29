@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from reprobench.models import CaseSpec, CaseValidationResult, Claim, Verdict
+from reprobench.security import resolve_child_path
 
 CASE_SPEC_FILENAME = "case.json"
 
@@ -48,8 +49,8 @@ def load_case_spec(case_path: Path) -> CaseSpec:
         raise CaseSpecError(f"invalid case spec {spec_path}: {joined}")
 
     claim_raw = raw["claim"]
-    artifact_path = case_dir / raw["artifact"]
-    dataset_path = case_dir / raw["dataset"] if raw.get("dataset") else None
+    artifact_path = resolve_child_path(case_dir, str(raw["artifact"]))
+    dataset_path = resolve_child_path(case_dir, str(raw["dataset"])) if raw.get("dataset") else None
 
     return CaseSpec(
         path=case_dir,
@@ -106,12 +107,24 @@ def _validate_raw_spec(raw: dict[str, Any], case_dir: Path) -> list[str]:
         errors.append(f"name must match directory name: {case_dir.name}")
 
     artifact = raw.get("artifact")
-    if artifact and not (case_dir / str(artifact)).exists():
-        errors.append(f"artifact does not exist: {artifact}")
+    if artifact:
+        try:
+            artifact_path = resolve_child_path(case_dir, str(artifact))
+        except ValueError as exc:
+            errors.append(f"invalid artifact path: {exc}")
+        else:
+            if not artifact_path.exists():
+                errors.append(f"artifact does not exist: {artifact}")
 
     dataset = raw.get("dataset")
-    if dataset and not (case_dir / str(dataset)).exists():
-        errors.append(f"dataset does not exist: {dataset}")
+    if dataset:
+        try:
+            dataset_path = resolve_child_path(case_dir, str(dataset))
+        except ValueError as exc:
+            errors.append(f"invalid dataset path: {exc}")
+        else:
+            if not dataset_path.exists():
+                errors.append(f"dataset does not exist: {dataset}")
 
     claim = raw.get("claim")
     if not isinstance(claim, dict):
