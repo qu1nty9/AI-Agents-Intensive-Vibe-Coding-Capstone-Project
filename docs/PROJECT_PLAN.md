@@ -53,6 +53,7 @@ As of June 29, 2026, the project has progressed beyond the original foundation p
 - security tests cover path traversal, secret handling, redaction, and unsafe-run behavior;
 - static dashboard artifacts are generated for local demo and GitHub Pages;
 - final writeup and video script drafts are available in `docs/`;
+- submission bundle and cover image are available for the Kaggle media gallery;
 - GitHub Actions CI runs the proof suite on Python 3.11 and Python 3.12.
 
 Deadline from the local competition brief:
@@ -300,7 +301,9 @@ Core entities:
 │   ├── architecture.md
 │   ├── kaggle_writeup_draft.md
 │   ├── kaggle_writeup_final.md
+│   ├── submission_bundle.md
 │   ├── demo_script.md
+│   ├── assets/
 │   └── video_script_final.md
 ├── examples/
 │   └── cases/
@@ -504,6 +507,7 @@ Deliverables:
 - Kaggle Writeup draft under 2,500 words;
 - YouTube video outline and recording;
 - cover image;
+- submission bundle;
 - public GitHub repo;
 - final project link.
 
@@ -524,6 +528,7 @@ Deliverables:
 - `make ci` local proof command;
 - generated benchmark, report, dashboard, and Pages artifacts checked for drift;
 - README badges and final submission links.
+- cover image and media handoff links.
 
 Acceptance criteria:
 

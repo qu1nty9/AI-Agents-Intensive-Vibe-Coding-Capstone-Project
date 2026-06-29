@@ -7,7 +7,10 @@ Use this checklist before submitting the Kaggle Writeup.
 - Kaggle Writeup under 2,500 words.
 - Final writeup draft: `docs/kaggle_writeup_final.md`.
 - Final video script: `docs/video_script_final.md`.
-- Cover image in the media gallery.
+- Cover image: `docs/assets/reprobench-cover.png`.
+- Cover source: `docs/assets/reprobench-cover.svg`.
+- Submission bundle: `docs/submission_bundle.md`.
+- Cover image uploaded to the Kaggle media gallery.
 - YouTube video under 5 minutes.
 - Public GitHub repository.
 - Public project/demo link or reproducible setup instructions.
@@ -49,6 +52,9 @@ Expected results:
 - [Security model](security.md)
 - [Final Kaggle writeup draft](kaggle_writeup_final.md)
 - [Final video script](video_script_final.md)
+- [Submission bundle](submission_bundle.md)
+- [Cover image](assets/reprobench-cover.png)
+- [Cover source](assets/reprobench-cover.svg)
 
 ## Video Demo Flow
 

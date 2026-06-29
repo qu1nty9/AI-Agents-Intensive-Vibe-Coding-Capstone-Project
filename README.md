@@ -131,6 +131,12 @@ Final writeup draft: [docs/kaggle_writeup_final.md](docs/kaggle_writeup_final.md
 
 Final video script: [docs/video_script_final.md](docs/video_script_final.md).
 
+Submission bundle: [docs/submission_bundle.md](docs/submission_bundle.md).
+
+Cover image: [docs/assets/reprobench-cover.png](docs/assets/reprobench-cover.png).
+
+Cover source: [docs/assets/reprobench-cover.svg](docs/assets/reprobench-cover.svg).
+
 ## Benchmark Suite
 
 The initial benchmark suite lives in [examples/cases](examples/cases). Schema and design rules are documented in [docs/benchmark_cases.md](docs/benchmark_cases.md).
