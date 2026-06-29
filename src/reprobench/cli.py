@@ -11,7 +11,12 @@ from reprobench.agents.workflow import build_initial_plan, run_foundation_workfl
 from reprobench.benchmark import list_case_specs, validate_all_cases, validate_case_directory
 from reprobench.mcp_server import call_tool, list_tools
 from reprobench.mcp_server.json_stdio import serve_json_stdio
-from reprobench.reporting import report_to_dict, write_benchmark_summary, write_report_bundle
+from reprobench.reporting import (
+    report_to_dict,
+    write_benchmark_summary,
+    write_dashboard,
+    write_report_bundle,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -109,6 +114,26 @@ def build_parser() -> argparse.ArgumentParser:
         help="Run the optional FastMCP server. Requires installing .[mcp].",
     )
 
+    dashboard_parser = subparsers.add_parser("dashboard", help="Generate static demo dashboard.")
+    dashboard_parser.add_argument(
+        "--benchmark-summary",
+        type=Path,
+        default=Path("reports/sample/benchmark/benchmark_summary.json"),
+        help="Path to benchmark_summary.json.",
+    )
+    dashboard_parser.add_argument(
+        "--evidence-report",
+        type=Path,
+        default=Path("reports/sample/data_leakage/report.json"),
+        help="Path to a report.json evidence artifact.",
+    )
+    dashboard_parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("reports/sample/dashboard/index.html"),
+        help="Output HTML file.",
+    )
+
     return parser
 
 
@@ -146,6 +171,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "mcp":
         return handle_mcp_command(args, parser)
+
+    if args.command == "dashboard":
+        output_path = write_dashboard(
+            args.benchmark_summary,
+            args.evidence_report,
+            args.output,
+        )
+        print(f"Wrote demo dashboard: {output_path}")
+        return 0
 
     parser.error(f"unknown command: {args.command}")
     return 2
@@ -229,7 +263,7 @@ def print_info() -> None:
     print("ReproBench Agent")
     print(f"Version: {__version__}")
     print("Track: Kaggle Freestyle")
-    print("Milestone: 6 - submission polish")
+    print("Milestone: 7 - static demo dashboard")
     print("Thesis: Turn ML claims into reproducible, auditable evidence.")
 
 

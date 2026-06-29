@@ -15,3 +15,9 @@ Generate the benchmark summary:
 ```bash
 make benchmark-report
 ```
+
+Generate the static dashboard:
+
+```bash
+make dashboard
+```

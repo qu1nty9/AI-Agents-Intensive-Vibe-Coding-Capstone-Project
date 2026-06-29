@@ -17,6 +17,7 @@ make test
 make audit-cases
 make benchmark-report
 make sample-report
+make dashboard
 make mcp-demo
 make demo
 make compile
@@ -28,12 +29,14 @@ Expected results:
 - benchmark verdicts match `5/5`;
 - `reports/sample/benchmark/benchmark_summary.md` is generated;
 - `reports/sample/data_leakage/report.md` is generated;
+- `reports/sample/dashboard/index.html` is generated;
 - MCP `audit_case` demo returns `partially_reproduced` for `data_leakage`.
 
 ## Writeup Evidence To Link
 
 - [Benchmark summary](../reports/sample/benchmark/benchmark_summary.md)
 - [Data leakage evidence report](../reports/sample/data_leakage/report.md)
+- [Static demo dashboard](../reports/sample/dashboard/index.html)
 - [Architecture](architecture.md)
 - [MCP server](mcp_server.md)
 - [Security model](security.md)
@@ -55,4 +58,3 @@ Expected results:
 - GitHub repository is public.
 - YouTube video is public or unlisted but accessible.
 - Kaggle Writeup has the Freestyle track selected.
-

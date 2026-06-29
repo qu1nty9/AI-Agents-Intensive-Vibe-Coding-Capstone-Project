@@ -100,6 +100,25 @@ class CliTest(TestCase):
             self.assertEqual(result.returncode, 0)
             self.assertIn("Wrote report", result.stdout)
 
+    def test_dashboard_command_writes_html(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "reprobench",
+                    "dashboard",
+                    "--output",
+                    f"{temp_dir}/index.html",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(result.returncode, 0)
+            self.assertIn("Wrote demo dashboard", result.stdout)
+
     def test_mcp_list_tools_command_runs(self):
         result = subprocess.run(
             [sys.executable, "-m", "reprobench", "mcp", "list-tools"],

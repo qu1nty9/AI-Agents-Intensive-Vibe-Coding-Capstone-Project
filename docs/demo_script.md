@@ -32,6 +32,7 @@ Show:
 ```bash
 make benchmark-report
 make sample-report
+make dashboard
 ```
 
 Then open the generated report and point out:
@@ -43,6 +44,7 @@ Then open the generated report and point out:
 - leakage finding;
 - final verdict;
 - recommended fix.
+- the dashboard view.
 
 Also show the full benchmark proof:
 
@@ -69,6 +71,7 @@ Open:
 
 - `reports/sample/benchmark/benchmark_summary.md`
 - `reports/sample/data_leakage/report.md`
+- `reports/sample/dashboard/index.html`
 
 ## 4:20-5:00 - Close
 

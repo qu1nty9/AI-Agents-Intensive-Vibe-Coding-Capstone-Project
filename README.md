@@ -23,7 +23,7 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 6 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, MCP tool wrapper, security hardening, and submission polish.
+Milestone 7 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, MCP tool wrapper, security hardening, submission polish, and a static demo dashboard.
 
 Implemented now:
 
@@ -62,6 +62,7 @@ PYTHONPATH=src python3 -m reprobench mcp call audit_case --args-json '{"case_pat
 PYTHONPATH=src python3 -m reprobench plan examples/cases/clean_baseline
 PYTHONPATH=src python3 -m reprobench run examples/cases/clean_baseline
 PYTHONPATH=src python3 -m reprobench run examples/cases/data_leakage --output-dir reports/sample/data_leakage
+PYTHONPATH=src python3 -m reprobench dashboard
 ```
 
 After installing the package locally, the console script is also available:
@@ -87,6 +88,7 @@ make demo
 make audit-cases
 make benchmark-report
 make sample-report
+make dashboard
 make mcp-tools
 make mcp-demo
 ```
@@ -133,6 +135,16 @@ make validate-cases
 make audit-cases
 make benchmark-report
 ```
+
+## Demo Dashboard
+
+Generate the static demo dashboard:
+
+```bash
+make dashboard
+```
+
+Open [reports/sample/dashboard/index.html](reports/sample/dashboard/index.html) to inspect the benchmark proof, data leakage verdict, findings, and tool trace in one page.
 
 ## Repository Layout
 

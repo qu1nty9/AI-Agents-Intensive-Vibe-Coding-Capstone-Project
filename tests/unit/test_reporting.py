@@ -7,9 +7,11 @@ from reprobench.agents.workflow import run_foundation_workflow
 from reprobench.reporting import (
     benchmark_summary_to_dict,
     benchmark_summary_to_markdown,
+    build_dashboard_html,
     report_to_dict,
     report_to_markdown,
     write_benchmark_summary,
+    write_dashboard,
     write_report_bundle,
 )
 
@@ -72,3 +74,75 @@ class ReportingTest(TestCase):
             self.assertTrue(json_path.exists())
             payload = json.loads(json_path.read_text(encoding="utf-8"))
             self.assertEqual(payload["matched_cases"], 1)
+
+    def test_build_dashboard_html_contains_summary_and_findings(self):
+        benchmark_summary = {
+            "total_cases": 1,
+            "matched_cases": 1,
+            "cases": [
+                {
+                    "name": "data_leakage",
+                    "expected_verdict": "partially_reproduced",
+                    "actual_verdict": "partially_reproduced",
+                    "matched": True,
+                }
+            ],
+        }
+        evidence_report = {
+            "verdict": "partially_reproduced",
+            "summary": "Metric reproduced with leakage warning.",
+            "tool_calls": [{"name": "detect_data_leakage", "status": "completed"}],
+            "findings": [
+                {
+                    "severity": "warning",
+                    "title": "Potential target leakage",
+                    "detail": "Feature copies target.",
+                }
+            ],
+        }
+
+        html = build_dashboard_html(benchmark_summary, evidence_report)
+
+        self.assertIn("ReproBench Agent Demo Dashboard", html)
+        self.assertIn("Potential target leakage", html)
+        self.assertIn("detect_data_leakage", html)
+
+    def test_write_dashboard_writes_html_file(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            benchmark_path = root / "benchmark.json"
+            report_path = root / "report.json"
+            output_path = root / "dashboard" / "index.html"
+            benchmark_path.write_text(
+                json.dumps(
+                    {
+                        "total_cases": 1,
+                        "matched_cases": 1,
+                        "cases": [
+                            {
+                                "name": "clean_baseline",
+                                "expected_verdict": "reproduced",
+                                "actual_verdict": "reproduced",
+                                "matched": True,
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            report_path.write_text(
+                json.dumps(
+                    {
+                        "verdict": "reproduced",
+                        "summary": "ok",
+                        "tool_calls": [],
+                        "findings": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            written = write_dashboard(benchmark_path, report_path, output_path)
+
+            self.assertEqual(written, output_path)
+            self.assertTrue(output_path.exists())
