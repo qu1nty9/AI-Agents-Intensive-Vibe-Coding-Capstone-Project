@@ -5,6 +5,8 @@ Use this checklist before submitting the Kaggle Writeup.
 ## Required Assets
 
 - Kaggle Writeup under 2,500 words.
+- Final writeup draft: `docs/kaggle_writeup_final.md`.
+- Final video script: `docs/video_script_final.md`.
 - Cover image in the media gallery.
 - YouTube video under 5 minutes.
 - Public GitHub repository.
@@ -22,6 +24,7 @@ make pages
 make mcp-demo
 make demo
 make compile
+make ci
 ```
 
 Expected results:
@@ -33,6 +36,7 @@ Expected results:
 - `reports/sample/dashboard/index.html` is generated;
 - `docs/index.html` is generated for GitHub Pages;
 - MCP `audit_case` demo returns `partially_reproduced` for `data_leakage`.
+- GitHub Actions CI passes on Python 3.11 and Python 3.12.
 
 ## Writeup Evidence To Link
 
@@ -43,6 +47,8 @@ Expected results:
 - [Architecture](architecture.md)
 - [MCP server](mcp_server.md)
 - [Security model](security.md)
+- [Final Kaggle writeup draft](kaggle_writeup_final.md)
+- [Final video script](video_script_final.md)
 
 ## Video Demo Flow
 
@@ -58,6 +64,8 @@ Expected results:
 - No API keys or passwords in the repository.
 - `.env.example` contains placeholders only.
 - README quickstart works from a clean checkout.
+- `make ci` passes locally.
+- CI workflow is green on GitHub.
 - GitHub repository is public.
 - YouTube video is public or unlisted but accessible.
 - Kaggle Writeup has the Freestyle track selected.

@@ -263,7 +263,7 @@ def print_info() -> None:
     print("ReproBench Agent")
     print(f"Version: {__version__}")
     print("Track: Kaggle Freestyle")
-    print("Milestone: 7 - static demo dashboard")
+    print("Milestone: 8 - CI-backed submission proof package")
     print("Thesis: Turn ML claims into reproducible, auditable evidence.")
 
 

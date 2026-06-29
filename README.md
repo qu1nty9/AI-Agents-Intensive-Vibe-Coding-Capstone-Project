@@ -1,5 +1,8 @@
 # ReproBench Agent
 
+[![CI](https://github.com/qu1nty9/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/qu1nty9/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/actions/workflows/ci.yml)
+[![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-2367d1)](https://qu1nty9.github.io/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/)
+
 **ReproBench Agent** is an evidence-first AI agent for checking whether machine learning experiments are reproducible. It reads an experiment case, extracts the claimed result, builds a reproduction plan, runs controlled checks, audits the evidence, and exports a reviewable report.
 
 Kaggle track: **Freestyle**.
@@ -23,7 +26,7 @@ This is built for Kaggle users, reviewers, data scientists, and teams who need f
 
 ## Current Status
 
-Milestone 7 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, MCP tool wrapper, security hardening, submission polish, and a static demo dashboard.
+Milestone 8 is complete: repository foundation, benchmark case suite, local core audit tools, evidence report export, MCP tool wrapper, security hardening, static demo dashboard, final submission docs, and CI-backed proof checks.
 
 Implemented now:
 
@@ -39,12 +42,16 @@ Implemented now:
 - MCP-facing tool registry with optional FastMCP server and dependency-free JSON-lines smoke server.
 - Security controls for path policy, secret scanning, redaction, and execution timeouts.
 - Submission checklist, Mermaid architecture diagram, expanded video script, and writeup draft.
-- Documentation skeleton for architecture, demo, and Kaggle writeup.
+- Final Kaggle writeup and video script drafts.
+- GitHub Actions CI that runs the proof suite on Python 3.11 and 3.12.
+- Documentation for architecture, demo, GitHub Pages, security, MCP tools, and Kaggle submission.
 - Unit and integration tests for CLI, workflow contracts, tools, reports, and case validation.
 
-Coming next:
+Remaining external submission tasks:
 
-- Optional UI or polished demo surface.
+- Enable GitHub Pages with the GitHub Actions source if it is not already enabled.
+- Record and upload the under-5-minute video.
+- Submit the final Kaggle Writeup with Freestyle selected.
 
 ## Quickstart
 
@@ -92,6 +99,7 @@ make dashboard
 make pages
 make mcp-tools
 make mcp-demo
+make ci
 ```
 
 If you install the optional development dependencies, `pytest` can also run the same tests:
@@ -118,6 +126,10 @@ MCP details: [docs/mcp_server.md](docs/mcp_server.md).
 Security details: [docs/security.md](docs/security.md).
 
 Submission checklist: [docs/submission_checklist.md](docs/submission_checklist.md).
+
+Final writeup draft: [docs/kaggle_writeup_final.md](docs/kaggle_writeup_final.md).
+
+Final video script: [docs/video_script_final.md](docs/video_script_final.md).
 
 ## Benchmark Suite
 
@@ -158,7 +170,9 @@ Open [reports/sample/dashboard/index.html](reports/sample/dashboard/index.html) 
 │   ├── PROJECT_PLAN.md
 │   ├── architecture.md
 │   ├── demo_script.md
-│   └── kaggle_writeup_draft.md
+│   ├── kaggle_writeup_draft.md
+│   ├── kaggle_writeup_final.md
+│   └── video_script_final.md
 ├── examples/
 │   └── cases/
 ├── reports/

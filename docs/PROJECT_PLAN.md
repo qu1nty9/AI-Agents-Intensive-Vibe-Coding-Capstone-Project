@@ -42,6 +42,19 @@ By the submission deadline, the repository should contain:
 - a concise 5-minute YouTube demo;
 - a Kaggle Writeup under 2,500 words.
 
+## Current Implementation Status
+
+As of June 29, 2026, the project has progressed beyond the original foundation plan:
+
+- five benchmark cases are implemented and audited with `5/5` expected verdicts matched;
+- local tools cover execution, metric comparison, seed checks, leakage checks, secret scanning, redaction, and path policy;
+- the agent workflow exports Markdown and JSON evidence reports;
+- MCP-facing tools are available through a dependency-free JSON-lines server and optional FastMCP entrypoint;
+- security tests cover path traversal, secret handling, redaction, and unsafe-run behavior;
+- static dashboard artifacts are generated for local demo and GitHub Pages;
+- final writeup and video script drafts are available in `docs/`;
+- GitHub Actions CI runs the proof suite on Python 3.11 and Python 3.12.
+
 Deadline from the local competition brief:
 
 - Kaggle submission due: **July 6, 2026 at 11:59 PM PT**.
@@ -286,7 +299,9 @@ Core entities:
 │   ├── PROJECT_PLAN.md
 │   ├── architecture.md
 │   ├── kaggle_writeup_draft.md
-│   └── demo_script.md
+│   ├── kaggle_writeup_final.md
+│   ├── demo_script.md
+│   └── video_script_final.md
 ├── examples/
 │   └── cases/
 │       ├── clean_baseline/
@@ -499,6 +514,23 @@ Acceptance criteria:
 - README setup verified from clean checkout;
 - writeup maps explicitly to judging criteria.
 
+### Milestone 8: CI-Backed Proof Package
+
+Goal: make the submission evidence continuously verifiable.
+
+Deliverables:
+
+- GitHub Actions CI workflow;
+- `make ci` local proof command;
+- generated benchmark, report, dashboard, and Pages artifacts checked for drift;
+- README badges and final submission links.
+
+Acceptance criteria:
+
+- CI passes on Python 3.11 and Python 3.12;
+- `make ci` passes locally;
+- generated evidence artifacts stay in sync with the committed outputs.
+
 ## Timeline
 
 ### June 28, 2026
@@ -560,6 +592,7 @@ The project is submission-ready when all of these are true:
 - Security features are implemented and tested.
 - Reports are exported as markdown and JSON.
 - Tests pass.
+- CI passes on GitHub.
 - No secrets are present in the repository.
 - Public video is under 5 minutes.
 - Kaggle Writeup is under 2,500 words.
@@ -631,4 +664,3 @@ Target length: 1,800-2,200 words.
 The final project should make one thing obvious:
 
 > ReproBench Agent does not just answer questions about ML reproducibility. It gathers evidence, runs checks, audits results, and produces a reviewable report.
-

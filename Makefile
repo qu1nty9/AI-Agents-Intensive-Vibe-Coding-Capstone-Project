@@ -1,7 +1,7 @@
 PYTHON ?= python3
 PYTHONPATH := src
 
-.PHONY: help info cases validate-cases audit-cases benchmark-report sample-report dashboard pages mcp-tools mcp-demo plan demo test compile
+.PHONY: help info cases validate-cases audit-cases benchmark-report sample-report dashboard pages mcp-tools mcp-demo plan demo test compile ci
 
 help:
 	@echo "ReproBench Agent commands"
@@ -19,6 +19,7 @@ help:
 	@echo "  make demo     Run the milestone-0 demo flow"
 	@echo "  make test     Run unit and integration tests"
 	@echo "  make compile  Compile Python sources"
+	@echo "  make ci       Run the full proof suite used by GitHub Actions"
 
 info:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m reprobench info
@@ -70,3 +71,13 @@ test:
 
 compile:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m compileall -q src tests
+
+ci:
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) audit-cases PYTHON=$(PYTHON)
+	$(MAKE) benchmark-report PYTHON=$(PYTHON)
+	$(MAKE) sample-report PYTHON=$(PYTHON)
+	$(MAKE) dashboard PYTHON=$(PYTHON)
+	$(MAKE) pages PYTHON=$(PYTHON)
+	$(MAKE) mcp-demo PYTHON=$(PYTHON)
+	$(MAKE) compile PYTHON=$(PYTHON)
