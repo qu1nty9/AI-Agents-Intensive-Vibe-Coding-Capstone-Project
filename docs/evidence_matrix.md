@@ -74,6 +74,7 @@ The strongest demo is intentionally narrow and clear: `data_leakage` reports a p
 Proof:
 
 - [Final video script](video_script_final.md)
+- [Full video plan](video_plan.md)
 - [Data leakage evidence report](../reports/sample/data_leakage/report.md)
 - [Demo dashboard](index.html)
 

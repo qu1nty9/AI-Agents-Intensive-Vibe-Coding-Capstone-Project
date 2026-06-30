@@ -2,6 +2,8 @@
 
 Target duration: 4:30-5:00.
 
+Full on-screen action plan: [video_plan.md](video_plan.md).
+
 ## 0:00-0:25 - Hook
 
 Machine learning results are easy to claim and harder to verify. A notebook can report a strong score, but that score might depend on a missing seed, a broken environment, a metric mismatch, or even data leakage.

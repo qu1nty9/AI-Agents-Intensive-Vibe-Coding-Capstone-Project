@@ -2,6 +2,8 @@
 
 Target video length: under 5 minutes.
 
+Full on-screen action plan: [video_plan.md](video_plan.md).
+
 ## 0:00-0:30 - Problem
 
 Machine learning notebooks often make claims that are hard to verify. A score may depend on a hidden seed, a fragile environment, a metric mismatch, or even data leakage.

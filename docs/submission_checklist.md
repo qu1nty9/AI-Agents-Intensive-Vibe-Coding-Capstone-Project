@@ -7,6 +7,7 @@ Use this checklist before submitting the Kaggle Writeup.
 - Kaggle Writeup under 2,500 words.
 - Final writeup draft: `docs/kaggle_writeup_final.md`.
 - Final video script: `docs/video_script_final.md`.
+- Full video plan: `docs/video_plan.md`.
 - Judging evidence matrix: `docs/evidence_matrix.md`.
 - Cover image: `docs/assets/reprobench-cover.png`.
 - Cover source: `docs/assets/reprobench-cover.svg`.
@@ -54,6 +55,7 @@ Expected results:
 - [Security model](security.md)
 - [Final Kaggle writeup draft](kaggle_writeup_final.md)
 - [Final video script](video_script_final.md)
+- [Full video plan](video_plan.md)
 - [Submission bundle](submission_bundle.md)
 - [Cover image](assets/reprobench-cover.png)
 - [Cover source](assets/reprobench-cover.svg)

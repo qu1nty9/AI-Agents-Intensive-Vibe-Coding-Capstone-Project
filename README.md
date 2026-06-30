@@ -9,6 +9,22 @@ Kaggle track: **Freestyle**.
 
 > ReproBench Agent turns ML claims into reproducible, auditable evidence.
 
+## Judge This Project In 5 Minutes
+
+Start with the public demo dashboard, then verify the same evidence locally:
+
+1. Open the [GitHub Pages demo](https://qu1nty9.github.io/AI-Agents-Intensive-Vibe-Coding-Capstone-Project/).
+2. Review the [judging evidence matrix](docs/evidence_matrix.md).
+3. Run the proof path:
+
+```bash
+make audit-cases
+make sample-report
+make mcp-demo
+```
+
+Expected proof: benchmark verdicts match `5/5`, the `data_leakage` demo returns `partially_reproduced`, and the MCP demo returns the same structured audit trace.
+
 ## Why This Project Exists
 
 Machine learning claims often look convincing until someone tries to rerun the notebook. Missing seeds, hidden preprocessing, metric mismatches, dependency drift, and data leakage can make results unreliable. ReproBench Agent is designed to make those issues visible through an agent workflow with tool calls, traces, and structured reports.
@@ -43,13 +59,14 @@ Implemented now:
 - Security controls for path policy, secret scanning, redaction, and execution timeouts.
 - Submission checklist, Mermaid architecture diagram, expanded video script, and writeup draft.
 - Final Kaggle writeup and video script drafts.
+- Final video plan with the exact on-screen demo path.
 - GitHub Actions CI that runs the proof suite on Python 3.11 and 3.12.
 - Documentation for architecture, demo, GitHub Pages, security, MCP tools, and Kaggle submission.
 - Unit and integration tests for CLI, workflow contracts, tools, reports, and case validation.
 
 Remaining external submission tasks:
 
-- Enable GitHub Pages with the GitHub Actions source if it is not already enabled.
+- Confirm the latest GitHub Pages workflow is green.
 - Record and upload the under-5-minute video.
 - Submit the final Kaggle Writeup with Freestyle selected.
 
@@ -133,6 +150,8 @@ Final writeup draft: [docs/kaggle_writeup_final.md](docs/kaggle_writeup_final.md
 
 Final video script: [docs/video_script_final.md](docs/video_script_final.md).
 
+Full video plan: [docs/video_plan.md](docs/video_plan.md).
+
 Submission bundle: [docs/submission_bundle.md](docs/submission_bundle.md).
 
 Cover image: [docs/assets/reprobench-cover.png](docs/assets/reprobench-cover.png).
@@ -168,7 +187,7 @@ make pages
 
 Open [reports/sample/dashboard/index.html](reports/sample/dashboard/index.html) to inspect the benchmark proof, data leakage verdict, findings, and tool trace in one page.
 
-`make pages` writes the same dashboard to [docs/index.html](docs/index.html), which is ready for GitHub Pages deployment. Deployment notes: [docs/github_pages.md](docs/github_pages.md).
+`make pages` writes the same dashboard to [docs/index.html](docs/index.html), which is ready for GitHub Pages deployment. The dashboard includes benchmark proof, evidence attachments, the judging evidence matrix, audit findings, and the agent tool trace. Deployment notes: [docs/github_pages.md](docs/github_pages.md).
 
 ## Repository Layout
 
@@ -180,6 +199,8 @@ Open [reports/sample/dashboard/index.html](reports/sample/dashboard/index.html) 
 │   ├── demo_script.md
 │   ├── kaggle_writeup_draft.md
 │   ├── kaggle_writeup_final.md
+│   ├── evidence_matrix.md
+│   ├── video_plan.md
 │   └── video_script_final.md
 ├── examples/
 │   └── cases/

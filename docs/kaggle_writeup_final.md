@@ -98,6 +98,7 @@ Generated evidence artifacts:
 - `reports/sample/dashboard/index.html`
 - `docs/index.html` for GitHub Pages
 - `docs/evidence_matrix.md`
+- `docs/video_plan.md`
 
 The evidence matrix is the judging index for the project. It maps each core claim to a proof artifact and a command: agent workflow, benchmark coverage, data leakage behavior, MCP tools, security controls, public dashboard generation, and CI-backed reproducibility.
 
